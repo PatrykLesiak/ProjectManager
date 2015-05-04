@@ -57,3 +57,6 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/ProjectManager-web/target/
+/ProjectManager-ejb/target/
+/ProjectManager-ear/target/
