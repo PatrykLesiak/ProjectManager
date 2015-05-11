@@ -60,3 +60,6 @@ $RECYCLE.BIN/
 /ProjectManager-web/target/
 /ProjectManager-ejb/target/
 /ProjectManager-ear/target/
+/ProjectManager/ProjectManager-ejb/target/
+/ProjectManager/ProjectManager-web/target/
+/ProjectManager/ProjectManager-ear/target/

@@ -4,12 +4,12 @@
     <parent>
     <artifactId>ProjectManager</artifactId>
     <groupId>pl.agh.wfiis</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>dev</version>
   </parent>
 
     <groupId>pl.agh.wfiis</groupId>
     <artifactId>ProjectManager-ejb</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>dev</version>
     <packaging>ejb</packaging>
 
     <name>ProjectManager-ejb</name>
