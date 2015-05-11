@@ -4,12 +4,12 @@
     <parent>
     <artifactId>ProjectManager</artifactId>
     <groupId>pl.agh.wfiis</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <version>dev</version>
   </parent>
 
     <groupId>pl.agh.wfiis</groupId>
     <artifactId>ProjectManager-ear</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>dev</version>
     <packaging>ear</packaging>
 
     <name>ProjectManager-ear</name>
@@ -44,13 +44,13 @@
         <dependency>
             <groupId>pl.agh.wfiis</groupId>
             <artifactId>ProjectManager-ejb</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>dev</version>
             <type>ejb</type>
         </dependency>
         <dependency>
             <groupId>pl.agh.wfiis</groupId>
             <artifactId>ProjectManager-web</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>dev</version>
             <type>war</type>
         </dependency>
     </dependencies>
