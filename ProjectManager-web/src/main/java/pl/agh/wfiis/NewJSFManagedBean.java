@@ -8,6 +8,7 @@ package pl.agh.wfiis;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import javax.ejb.EJB;
 
 /**
  *
@@ -16,6 +17,8 @@ import java.io.Serializable;
 @Named(value = "newJSFManagedBean")
 @SessionScoped
 public class NewJSFManagedBean implements Serializable {
+    @EJB
+    private pl.agh.wfiis.NewSessionBean newSessionBean;
     private String lol;
     /**
      * Creates a new instance of NewJSFManagedBean
@@ -27,6 +30,12 @@ public class NewJSFManagedBean implements Serializable {
     public String test() {
         return lol;
     }
+    
+    public String test2() {
+        return newSessionBean.test();
+    }
+    
+    
     
     
     
