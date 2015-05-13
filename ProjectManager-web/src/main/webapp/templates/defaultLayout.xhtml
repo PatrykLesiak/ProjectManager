@@ -15,18 +15,10 @@
     </h:head>
  
     <h:body>
+        <ui:include src="navbar.xhtml"/>
         <div class="container">
-            <div id="header">
-                 <ui:include src="header.xhtml"/>
-            </div>
-		 
-            <div id="content">
 		<ui:insert name="content"/>
-            </div>
-		 
-            <div id="footer">
                 <ui:include src="footer.xhtml"/>
-            </div> 
         </div>
     </h:body>
 	
