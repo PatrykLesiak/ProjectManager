@@ -10,12 +10,11 @@
         <ui:composition template="templates/defaultLayout.xhtml">
         
             <ui:define name="content">
-                
+                <ui:include src="templates/welcomeText.xhtml"/> <!-- //@TODO include condition for viewing welcome text-->
                 <h:outputText value="Test: #{newJSFManagedBean.test2()}" />
                 <br/>
                 <h:outputText value="Test: #{newJSFManagedBean.test()}" />
                 <br/>
-                <ui:include src="templates/welcomeText.xhtml"/> <!-- //@TODO include condition for viewing welcome text-->
             </ui:define>
         
         </ui:composition>
