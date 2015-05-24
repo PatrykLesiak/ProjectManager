@@ -28,16 +28,16 @@ public class NewSessionBean {
     }
     
     public String test() {
-        User newUser = new User();
-        newUser.setUserid(3);
-        newUser.setFirstname("Andrzej");
-        userFacade.create(newUser);
+//        User newUser = new User();
+//        newUser.setUserid(3);
+//        newUser.setFirstname("Andrzej");
+//        userFacade.create(newUser);
         
         String out = "";
         List users = userFacade.findAll();
         for (Iterator it = users.iterator(); it.hasNext();) {
             User user = (User)it.next();
-            out += user.getFirstname() + ", ";
+            out += user.getEmail() + ", ";
         }
         return out;
     }

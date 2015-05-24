@@ -7,9 +7,11 @@ DROP TABLE Technologies;
 
 CREATE TABLE Users
 (
-UserID int PRIMARY KEY,
+UserID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
 LastName varchar(255),
-FirstName varchar(255)
+FirstName varchar(255),
+Email varchar(255) NOT NULL,
+Password varchar(256) NOT NULL
 );
 
 CREATE TABLE Projects
@@ -50,8 +52,8 @@ FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID)
 );
 
 
-INSERT INTO Users VALUES (1, 'Majewski', 'Maciej');
-INSERT INTO Users VALUES (2, 'Lesiak', 'Patryk');
+INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 
 INSERT INTO Projects VALUES(1, 'Test project', 'More description about project');
 
