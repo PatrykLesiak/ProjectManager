@@ -1,46 +1,58 @@
-DROP TABLE Technologies_to_Projects;
-DROP TABLE Projects_to_Users;
 DROP TABLE Users_to_Technologies;
-DROP TABLE Users;
-DROP TABLE Projects;
+DROP TABLE Users_to_Modules;
+DROP TABLE Technologies_to_Modules;
 DROP TABLE Technologies;
+DROP TABLE Modules;
+DROP TABLE Projects;
+DROP TABLE Users;
 
 CREATE TABLE Users
 (
-UserID int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+UserID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 LastName varchar(255),
 FirstName varchar(255),
 Email varchar(255) NOT NULL,
-Password varchar(256) NOT NULL
+Password varchar(256) NOT NULL,
+AvatarLink varchar(255),
+ReadmeLink varchar(255)
 );
 
 CREATE TABLE Projects
 (
-ProjectID int PRIMARY KEY,
+ProjectID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 Title varchar(255),
-Description varchar(1024)
+Description varchar(1024),
+LeaderID int NOT NULL,
+ModeratorID int NOT NULL,
+RreadmeLink varchar(255),
+ContactAndLinks varchar(1024),
+PictureLink varchar(255),
+FOREIGN KEY (LeaderID) REFERENCES Users(UserID),
+FOREIGN KEY (ModeratorID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Technologies
 (
-TechnologyID int PRIMARY KEY,
+TechnologyID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 Name varchar(255)
 );
 
-CREATE TABLE Technologies_to_Projects
+CREATE TABLE Modules
 (
-TechnologyID int NOT NULL,
+ModuleID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 ProjectID int NOT NULL,
-FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID),
+Title varchar(255),
+Description varchar(1024),
+ReadmeLink varchar(255),
 FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
 );
 
-CREATE TABLE Projects_to_Users
+CREATE TABLE Technologies_to_Modules
 (
-ProjectID int NOT NULL,
-UserID int NOT NULL,
-FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID),
-FOREIGN KEY (UserID) REFERENCES Users(UserID)
+TechnologyID int NOT NULL,
+ModuleID int NOT NULL,
+FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID),
+FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 );
 
 CREATE TABLE Users_to_Technologies
@@ -51,23 +63,33 @@ FOREIGN KEY (UserID) REFERENCES Users(UserID),
 FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID)
 );
 
+CREATE TABLE Users_to_Modules
+(
+UserID int NOT NULL,
+ModuleID int NOT NULL,
+FOREIGN KEY (UserID) REFERENCES Users(UserID),
+FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
+);
 
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 
-INSERT INTO Projects VALUES(1, 'Test project', 'More description about project');
+INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project', 'More description about project', 1, 2);
 
-INSERT INTO Technologies VALUES(1, 'Java');
-INSERT INTO Technologies VALUES(2, 'JavaEE');
-INSERT INTO Technologies VALUES(3, 'C');
-INSERT INTO Technologies VALUES(4, 'C++');
-INSERT INTO Technologies VALUES(5, 'C#');
-INSERT INTO Technologies VALUES(6, 'Python');
-INSERT INTO Technologies VALUES(7, 'Ruby');
+INSERT INTO Technologies(Name) VALUES('Java');
+INSERT INTO Technologies(Name) VALUES('JavaEE');
+INSERT INTO Technologies(Name) VALUES('C');
+INSERT INTO Technologies(Name) VALUES('C++');
+INSERT INTO Technologies(Name) VALUES('C#');
+INSERT INTO Technologies(Name) VALUES('Python');
+INSERT INTO Technologies(Name) VALUES('Ruby');
+INSERT INTO Technologies(Name) VALUES('SQL');
 
-INSERT INTO Users_to_Technologies VALUES (1, 6);
-INSERT INTO Users_to_Technologies VALUES (2, 4);
+INSERT INTO Modules(ProjectID, Title, Description, ReadmeLink) VALUES (1, 'Baza danych SQL', 'Zrobic baze danych', 'http://www.google.pl');
 
-Insert INTO Technologies_to_Projects VALUES(6, 1);
+INSERT INTO Users_to_Technologies  VALUES (1, 2);
+INSERT INTO Users_to_Technologies VALUES (2, 1);
 
-INSERT INTO Projects_to_Users VALUES(1, 1);
+INSERT INTO Technologies_to_Modules VALUES(8, 1);
+
+INSERT INTO Users_to_Modules VALUES(1,1);
