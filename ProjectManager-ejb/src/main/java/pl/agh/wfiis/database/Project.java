@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findByDescription", query = "SELECT p FROM Project p WHERE p.description = :description"),
     @NamedQuery(name = "Project.findByRreadmelink", query = "SELECT p FROM Project p WHERE p.rreadmelink = :rreadmelink"),
     @NamedQuery(name = "Project.findByContactandlinks", query = "SELECT p FROM Project p WHERE p.contactandlinks = :contactandlinks"),
-    @NamedQuery(name = "Project.findByPicturelink", query = "SELECT p FROM Project p WHERE p.picturelink = :picturelink")})
+    @NamedQuery(name = "Project.findByPicturelink", query = "SELECT p FROM Project p WHERE p.picturelink = :picturelink"),
+    @NamedQuery(name = "Project.findByRecruting", query = "SELECT p FROM Project p WHERE p.recruting = :recruting")})
 public class Project implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,6 +53,8 @@ public class Project implements Serializable {
     @Size(max = 255)
     @Column(name = "PICTURELINK")
     private String picturelink;
+    @Column(name = "RECRUTING")
+    private Boolean recruting;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
     private Collection<Module> moduleCollection;
     @JoinColumn(name = "LEADERID", referencedColumnName = "USERID")
@@ -114,6 +117,14 @@ public class Project implements Serializable {
 
     public void setPicturelink(String picturelink) {
         this.picturelink = picturelink;
+    }
+
+    public Boolean getRecruting() {
+        return recruting;
+    }
+
+    public void setRecruting(Boolean recruting) {
+        this.recruting = recruting;
     }
 
     @XmlTransient
