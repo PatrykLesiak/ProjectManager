@@ -18,7 +18,7 @@ import javax.ejb.EJB;
 @SessionScoped
 public class NewJSFManagedBean implements Serializable {
     @EJB
-    private pl.agh.wfiis.NewSessionBean newSessionBean;
+    private pl.agh.wfiis.model.TestBean newSessionBean;
     private String lol;
     /**
      * Creates a new instance of NewJSFManagedBean

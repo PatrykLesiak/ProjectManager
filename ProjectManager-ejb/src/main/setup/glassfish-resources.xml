@@ -16,4 +16,19 @@
     </admin-object-resource>
     <connector-connection-pool name="jms/UserMessageFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
     <connector-resource enabled="true" jndi-name="jms/UserMessageFactory" pool-name="jms/UserMessageFactoryPool"  />
+    <admin-object-resource enabled="true" jndi-name="jms/ModuleMessage"  res-type="javax.jms.Queue"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalQueue"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/ModuleMessageFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/ModuleMessageFactory" pool-name="jms/ModuleMessageFactoryPool"  />
+    <admin-object-resource enabled="true" jndi-name="jms/ProjectMessage"  res-type="javax.jms.Queue"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalQueue"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/ProjectMessageFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/ProjectMessageFactory" pool-name="jms/ProjectMessageFactoryPool"  />
+    <admin-object-resource enabled="true" jndi-name="jms/TechnologyMessage"  res-type="javax.jms.Queue"  res-adapter="jmsra">
+        <property name="Name" value="PhysicalQueue"/>
+    </admin-object-resource>
+    <connector-connection-pool name="jms/TechnologyMessageFactoryPool"  connection-definition-name="javax.jms.QueueConnectionFactory"  resource-adapter-name="jmsra"/>
+    <connector-resource enabled="true" jndi-name="jms/TechnologyMessageFactory" pool-name="jms/TechnologyMessageFactoryPool"  />
 </resources>
