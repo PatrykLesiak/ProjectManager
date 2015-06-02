@@ -1,0 +1,21 @@
+body{
+    padding: 3%;
+}
+
+
+.card {
+    background-color: lightgray;
+    border-radius:10px;
+    padding: 3px;
+    margin-bottom: 8px;
+   
+}
+
+.card.closed{
+    background: rgba(211,211,211,0.2);
+    color: rgba(3,3,3,0.2)
+}
+
+a.cardlink{
+    color: inherit;
+}
