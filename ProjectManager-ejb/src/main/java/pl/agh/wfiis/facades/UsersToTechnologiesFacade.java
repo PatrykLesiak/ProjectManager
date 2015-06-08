@@ -1,0 +1,22 @@
+package pl.agh.wfiis.facades;
+
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import pl.agh.wfiis.database.UsersToTechnologies;
+
+@Stateless
+public class UsersToTechnologiesFacade extends AbstractFacade<UsersToTechnologies> {
+    @PersistenceContext(unitName = "pl.agh.wfiis_ProjectManager-ejb_ejb_devPU")
+    private EntityManager em;
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    public UsersToTechnologiesFacade() {
+        super(UsersToTechnologies.class);
+    }
+    
+}

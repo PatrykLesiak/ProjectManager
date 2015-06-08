@@ -50,6 +50,7 @@ FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
 
 CREATE TABLE Technologies_to_Modules
 (
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 TechnologyID int NOT NULL,
 ModuleID int NOT NULL,
 FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID),
@@ -58,6 +59,7 @@ FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 
 CREATE TABLE Users_to_Technologies
 (
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 UserID int NOT NULL,
 TechnologyID int NOT NULL,
 FOREIGN KEY (UserID) REFERENCES Users(UserID),
@@ -66,6 +68,7 @@ FOREIGN KEY (TechnologyID) REFERENCES Technologies(TechnologyID)
 
 CREATE TABLE Users_to_Modules
 (
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 UserID int NOT NULL,
 ModuleID int NOT NULL,
 FOREIGN KEY (UserID) REFERENCES Users(UserID),
@@ -88,9 +91,9 @@ INSERT INTO Technologies(Name) VALUES('SQL');
 
 INSERT INTO Modules(ProjectID, Title, Description, ReadmeLink) VALUES (1, 'Baza danych SQL', 'Zrobic baze danych', 'http://www.google.pl');
 
-INSERT INTO Users_to_Technologies  VALUES (1, 2);
-INSERT INTO Users_to_Technologies VALUES (2, 1);
+INSERT INTO Users_to_Technologies(UserID, TechnologyID) VALUES (1, 2);
+INSERT INTO Users_to_Technologies (UserID, TechnologyID) VALUES (2, 1);
 
-INSERT INTO Technologies_to_Modules VALUES(8, 1);
+INSERT INTO Technologies_to_Modules(TechnologyID, ModuleID) VALUES(8, 1);
 
-INSERT INTO Users_to_Modules VALUES(1,1);
+INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(1,1);

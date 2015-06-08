@@ -34,6 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByAvatarlink", query = "SELECT u FROM User u WHERE u.avatarlink = :avatarlink"),
     @NamedQuery(name = "User.findByReadmelink", query = "SELECT u FROM User u WHERE u.readmelink = :readmelink")})
 public class User implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<UsersToTechnologies> usersToTechnologiesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<UsersToModules> usersToModulesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -206,6 +210,24 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.User[ userid=" + userid + " ]";
+    }
+
+    @XmlTransient
+    public Collection<UsersToTechnologies> getUsersToTechnologiesCollection() {
+        return usersToTechnologiesCollection;
+    }
+
+    public void setUsersToTechnologiesCollection(Collection<UsersToTechnologies> usersToTechnologiesCollection) {
+        this.usersToTechnologiesCollection = usersToTechnologiesCollection;
+    }
+
+    @XmlTransient
+    public Collection<UsersToModules> getUsersToModulesCollection() {
+        return usersToModulesCollection;
+    }
+
+    public void setUsersToModulesCollection(Collection<UsersToModules> usersToModulesCollection) {
+        this.usersToModulesCollection = usersToModulesCollection;
     }
     
 }

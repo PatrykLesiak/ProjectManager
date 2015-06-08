@@ -3,6 +3,7 @@ package pl.agh.wfiis.database;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,6 +31,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Module.findByReadmelink", query = "SELECT m FROM Module m WHERE m.readmelink = :readmelink"),
     @NamedQuery(name = "Module.findByRecruting", query = "SELECT m FROM Module m WHERE m.recruting = :recruting")})
 public class Module implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<UsersToModules> usersToModulesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<TechnologiesToModules> technologiesToModulesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -150,6 +156,24 @@ public class Module implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Module[ moduleid=" + moduleid + " ]";
+    }
+
+    @XmlTransient
+    public Collection<UsersToModules> getUsersToModulesCollection() {
+        return usersToModulesCollection;
+    }
+
+    public void setUsersToModulesCollection(Collection<UsersToModules> usersToModulesCollection) {
+        this.usersToModulesCollection = usersToModulesCollection;
+    }
+
+    @XmlTransient
+    public Collection<TechnologiesToModules> getTechnologiesToModulesCollection() {
+        return technologiesToModulesCollection;
+    }
+
+    public void setTechnologiesToModulesCollection(Collection<TechnologiesToModules> technologiesToModulesCollection) {
+        this.technologiesToModulesCollection = technologiesToModulesCollection;
     }
     
 }
