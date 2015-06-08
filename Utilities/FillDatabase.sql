@@ -23,10 +23,11 @@ ProjectID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, I
 Title varchar(255),
 Description varchar(1024),
 LeaderID int NOT NULL,
-ModeratorID int NOT NULL,
+ModeratorID int,
 RreadmeLink varchar(255),
 ContactAndLinks varchar(1024),
 PictureLink varchar(255),
+Recruting boolean,
 FOREIGN KEY (LeaderID) REFERENCES Users(UserID),
 FOREIGN KEY (ModeratorID) REFERENCES Users(UserID)
 );

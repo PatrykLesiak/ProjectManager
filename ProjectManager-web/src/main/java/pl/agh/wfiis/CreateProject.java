@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.agh.wfiis;
 
 
@@ -18,15 +13,15 @@ import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 import javax.persistence.Persistence;
+import pl.agh.wfiis.model.ProjectDatabaseController;
 
 @Named(value = "createProject")
 @SessionScoped
 public class CreateProject implements Serializable {
-
-     Logger logger = Logger.getLogger(getClass().getName());
-    
+   
     @EJB
-    private ProjectDatabaseController projectDatabaseControler; 
+    private ProjectDatabaseController projectDatabaseControler;
+    
     private String title;
     private String description;
     private String readmeLink;
@@ -103,7 +98,7 @@ public class CreateProject implements Serializable {
         this.pictureLink = pictureLink;
     }
     
-    public int authenticateUser(){
+    public int getUserIdFromSession(){
         return 1; //@TODO fix this authentication
     }
     
@@ -114,15 +109,11 @@ public class CreateProject implements Serializable {
         newProject.setRreadmelink(this.readmeLink);
         newProject.setContactandlinks(this.contactsAndLinks);
         newProject.setPicturelink(this.pictureLink);
-        int userId = authenticateUser();
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPAService");
-        EntityManager em = emf.createEntityManager();
-        User user = (User) em.createNamedQuery("User.findByUserid").setParameter("id", userId);
-        newProject.setLeaderid(user);
         newProject.setRecruting(Boolean.TRUE);
         
-        projectDatabaseControler.createNewProject(newProject);
-        logger.info("New project should be registrated in the database");
+        int leaderId = getUserIdFromSession();
+        
+        projectDatabaseControler.createNewProjectInDatabase(newProject, leaderId);
         
         return "/index";
     }

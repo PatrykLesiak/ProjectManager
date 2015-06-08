@@ -9,7 +9,9 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import pl.agh.wfiis.database.User;
+import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.facades.UserFacade;
+import pl.agh.wfiis.facades.ProjectFacade;
 
 @Stateful
 @LocalBean
@@ -17,6 +19,9 @@ public class UserDatabaseController {
 
     @EJB
     private UserFacade userFacade;
+    
+    @EJB
+    private ProjectFacade projectFacade;
     
     public void registerUserInDatabase(User user) {
         try {
@@ -26,9 +31,9 @@ public class UserDatabaseController {
             for (byte byt : bytesPassword) result.append(Integer.toString((byt & 0xff) + 0x100, 16).substring(1));
             user.setPassword(result.toString());
             userFacade.create(user);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            Logger.getLogger(UserDatabaseController.class.getName()).log(Level.SEVERE, null, ex);
-        }           
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException exception) {
+            Logger.getLogger(UserDatabaseController.class.getName()).log(Level.SEVERE, null, exception);
+        }
     }
     
 }
