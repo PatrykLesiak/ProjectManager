@@ -14,71 +14,27 @@
   <h1>Check out these projects!</h1>
 </div>
            <br></br>
+
            <table class="table table-hover">
-
-
-      <tr><td>
-        <div class="col-md-4"><a href="#projectsite">
-            <img src="http://www.yourenergyblog.com/wp-content/uploads/2013/01/incandescent-bulb1-300x300.png" class="img-circle"></img>
+               <ui:repeat value="#{createProject.randomProjectList}" var="randomProject">
+          <tr><td>
+        <div class="col-md-4"><a href="#">
+            <img src="#{randomProject.pictureLink}" class="img-circle"></img>
         </a>
         </div>
         <div class="col-md-8">
-             <h2><a href="#projectsite">Open source lightbulb </a><span class="label label-success">Recruting</span></h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
+            <h2><a href="#">#{randomProject.title}</a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting eq recruting}">Recruting</h:panelGroup></h2>
+            <p>#{randomProject.description}</p>
+            <!--<ui:repeat value="#randomProject.technologies" var="technology" rendered="#not empty randomProject.technologies">
+                <h:panelGroup class="label label-primary"> technology.name </h:panelGroup>
+            </ui:repeat>-->
+    </div></td>
+  </tr>
 
-Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
-        <span class="label label-default">Django</span>
-            <span class="label label-primary">Leadership</span>
-            <span class="label label-default">Server administrator</span>
-            <span class="label label-default">Tornado</span>
-            <span class="label label-default">JavaScript</span>
-            <span class="label label-default">Management</span>
-        </div></td>
-      </tr>
-            <tr><td>
-           
-        
-        <div class="col-md-8">
-            <h2><a href="#projectsite">Spotify dongle player </a><span class="label label-danger">Not recruting</span></h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
+</ui:repeat>
 
-Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
-        <span class="label label-default">Django</span>
-            <span class="label label-default">Leadership</span>
-            <span class="label label-primary">Server administrator</span>
-            <span class="label label-default">Tornado</span>
-            <span class="label label-default">JavaScript</span>
-            <span class="label label-default">Management</span>
-        </div>
-              <div class="col-md-4">
-             <a href="#projectsite">
-            <img src="http://www.advancetec.co.uk/media/catalog/product/cache/1/image/1250x1250/b65b7106e6199ae52d7f08f5a5033ae0/m/i/micronext_mn-wd330b_wireless_usb_wifi_300mbps_lan_dongle_for_pc_-_laptop.jpg" class="img-circle" width="300" height="300"></img>
-                 </a>
-                 </div>
-      </td>
-      </tr>
-          
-      <tr><td>
-        <div class="col-md-4">
-            <a href="#projectsite">
-            <img  src="https://elliorg.files.wordpress.com/2014/02/wp_001377.jpg" class="img-circle" width="300" height="300"></img>
-            </a>
-        </div>
-        <div class="col-md-8">
-             <h2><a href="#projectsite">Open source lightbulb</a> <span class="label label-success">Recruting</span></h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
 
-Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
-        <span class="label label-default">Django</span>
-            <span class="label label-default">Leadership</span>
-            <span class="label label-default">Server administrator</span>
-            <span class="label label-primary">Tornado</span>
-            <span class="label label-primary">JavaScript</span>
-            <span class="label label-primary">Management</span>
-        </div>
-     </td>
-      </tr>
-               </table>
+    </table>
            <br></br>
              
   <div class="span7 text-center"> <button class="btn btn-large btn-primary" type="button">More projects</button></div>

@@ -78,7 +78,9 @@ FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 
-INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project', 'More description about project', 1, 2);
+INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project1', 'More description about project', 1, 2);
+INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project2', 'More description about project', 1, 2);
+INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project3', 'More description about project', 1, 2);
 
 INSERT INTO Technologies(Name) VALUES('Java');
 INSERT INTO Technologies(Name) VALUES('JavaEE');

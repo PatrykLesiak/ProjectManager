@@ -4,15 +4,11 @@ package pl.agh.wfiis;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.Project;
-import pl.agh.wfiis.model.ProjectDatabaseController;
-import javax.persistence.Persistence;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
 @Named(value = "createProject")
@@ -25,9 +21,10 @@ public class CreateProject implements Serializable {
     private String title;
     private String description;
     private String readmeLink;
+    private String recruting;
     private String contactsAndLinks;
     private String pictureLink;
-
+    private List<CreateProject> randomProjectList;
     /**
      * @return the title
      */
@@ -116,5 +113,40 @@ public class CreateProject implements Serializable {
         projectDatabaseControler.createNewProjectInDatabase(newProject, leaderId);
         
         return "/index";
+    }
+    public static CreateProject fromProject(Project project){
+        CreateProject webBeanProject = new CreateProject();
+        webBeanProject.setContactsAndLinks(project.getContactandlinks());
+        webBeanProject.setDescription(project.getDescription());
+        webBeanProject.setRecruting(project.getRecruting()?"Recruting":"");
+        webBeanProject.setTitle(project.getTitle());
+        webBeanProject.setPictureLink(project.getPicturelink());
+        return webBeanProject;
+    }
+    public void setRandomProjectList(List<CreateProject> list){
+        this.randomProjectList = list;
+    }
+    
+    public List<CreateProject> getRandomProjectList(){
+        int number = 3;
+        randomProjectList = new ArrayList<>();
+        for (Project project : projectDatabaseControler.getRandomProjects(number)) {
+            randomProjectList.add(fromProject(project));
+        }
+        return randomProjectList;
+    }
+
+    /**
+     * @return the recruting
+     */
+    public String getRecruting() {
+        return recruting;
+    }
+
+    /**
+     * @param recruting the recruting to set
+     */
+    public void setRecruting(String recruting) {
+        this.recruting = recruting;
     }
 }

@@ -2,7 +2,10 @@ package pl.agh.wfiis.model;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Vector;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -31,10 +34,23 @@ public class ProjectDatabaseController {
         return listOfAllProjects;
     }
     
+        
+    public List<Project> getRandomProjects(int number) {
+        int projectCount = projectFacade.count();
+        List<Project> listOfRandomProjects = new ArrayList<>();
+        Random r = new Random();
+        for(int i =0;i<number;++i){
+            int randomId = r.nextInt(projectCount)+1;
+            listOfRandomProjects.add(projectFacade.find(randomId));     
+        }
+        return listOfRandomProjects;
+    }
+    
     public void createNewProjectInDatabase(Project newProject, int leaderId){
         User leader = userFacade.find(leaderId);
         newProject.setLeaderid(leader);
         projectFacade.create(newProject);   
         logger.info("New project should be registrated in the database");
     }
+    
 }
