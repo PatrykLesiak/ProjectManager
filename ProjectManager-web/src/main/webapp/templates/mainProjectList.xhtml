@@ -23,7 +23,7 @@
         </a>
         </div>
         <div class="col-md-8">
-            <h2><a href="#">#{randomProject.title}</a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting eq recruting}">Recruting</h:panelGroup></h2>
+            <h2><a href="#">#{randomProject.title}</a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting}">Recruting</h:panelGroup></h2>
             <p>#{randomProject.description}</p>
             <!--<ui:repeat value="#randomProject.technologies" var="technology" rendered="#not empty randomProject.technologies">
                 <h:panelGroup class="label label-primary"> technology.name </h:panelGroup>

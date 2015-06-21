@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.model.ProjectDatabaseController;
@@ -18,10 +19,12 @@ public class CreateProject implements Serializable {
     @EJB
     private ProjectDatabaseController projectDatabaseControler;
     
+    Logger logger = Logger.getLogger(getClass().getName());
+    
     private String title;
     private String description;
     private String readmeLink;
-    private String recruting;
+    private Boolean recruting;
     private String contactsAndLinks;
     private String pictureLink;
     private List<CreateProject> randomProjectList;
@@ -114,13 +117,15 @@ public class CreateProject implements Serializable {
         
         return "/index";
     }
-    public static CreateProject fromProject(Project project){
+    public CreateProject fromProject(Project project){
         CreateProject webBeanProject = new CreateProject();
         webBeanProject.setContactsAndLinks(project.getContactandlinks());
         webBeanProject.setDescription(project.getDescription());
-        webBeanProject.setRecruting(project.getRecruting()?"Recruting":"");
+        webBeanProject.setRecruting(project.getRecruting());
+        logger.info("Wazne: " +  project.getRecruting().toString());
+        
         webBeanProject.setTitle(project.getTitle());
-        webBeanProject.setPictureLink(project.getPicturelink());
+        //webBeanProject.setPictureLink(project.getPicturelink());  // Tutaj pobierany z bazy jest NULL, tak byc nie moze
         return webBeanProject;
     }
     public void setRandomProjectList(List<CreateProject> list){
@@ -139,14 +144,14 @@ public class CreateProject implements Serializable {
     /**
      * @return the recruting
      */
-    public String getRecruting() {
+    public Boolean getRecruting() {
         return recruting;
     }
 
     /**
      * @param recruting the recruting to set
      */
-    public void setRecruting(String recruting) {
+    public void setRecruting(Boolean recruting) {
         this.recruting = recruting;
     }
 }

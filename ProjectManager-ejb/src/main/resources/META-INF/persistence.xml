@@ -2,6 +2,12 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="pl.agh.wfiis_ProjectManager-ejb_ejb_devPU" transaction-type="JTA">
     <jta-data-source>jdbc/projectDatabase</jta-data-source>
+    <class>pl.agh.wfiis.database.User</class>
+    <class>pl.agh.wfiis.database.TechnologiesToModules</class>
+    <class>pl.agh.wfiis.database.Technology</class>
+    <class>pl.agh.wfiis.database.UsersToModules</class>
+    <class>pl.agh.wfiis.database.UsersToTechnologies</class>
+    <class>pl.agh.wfiis.database.Module</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties/>
   </persistence-unit>

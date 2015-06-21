@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @Table(name = "USERS")
@@ -38,6 +36,8 @@ public class User implements Serializable {
     private Collection<UsersToTechnologies> usersToTechnologiesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
     private Collection<UsersToModules> usersToModulesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaderid")
+    private Collection<Project> projectCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,20 +67,6 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "READMELINK")
     private String readmelink;
-    @JoinTable(name = "USERS_TO_TECHNOLOGIES", joinColumns = {
-        @JoinColumn(name = "USERID", referencedColumnName = "USERID")}, inverseJoinColumns = {
-        @JoinColumn(name = "TECHNOLOGYID", referencedColumnName = "TECHNOLOGYID")})
-    @ManyToMany
-    private Collection<Technology> technologyCollection;
-    @JoinTable(name = "USERS_TO_MODULES", joinColumns = {
-        @JoinColumn(name = "USERID", referencedColumnName = "USERID")}, inverseJoinColumns = {
-        @JoinColumn(name = "MODULEID", referencedColumnName = "MODULEID")})
-    @ManyToMany
-    private Collection<Module> moduleCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaderid")
-    private Collection<Project> projectCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moderatorid")
-    private Collection<Project> projectCollection1;
 
     public User() {
     }
@@ -151,42 +137,6 @@ public class User implements Serializable {
         this.readmelink = readmelink;
     }
 
-    @XmlTransient
-    public Collection<Technology> getTechnologyCollection() {
-        return technologyCollection;
-    }
-
-    public void setTechnologyCollection(Collection<Technology> technologyCollection) {
-        this.technologyCollection = technologyCollection;
-    }
-
-    @XmlTransient
-    public Collection<Module> getModuleCollection() {
-        return moduleCollection;
-    }
-
-    public void setModuleCollection(Collection<Module> moduleCollection) {
-        this.moduleCollection = moduleCollection;
-    }
-
-    @XmlTransient
-    public Collection<Project> getProjectCollection() {
-        return projectCollection;
-    }
-
-    public void setProjectCollection(Collection<Project> projectCollection) {
-        this.projectCollection = projectCollection;
-    }
-
-    @XmlTransient
-    public Collection<Project> getProjectCollection1() {
-        return projectCollection1;
-    }
-
-    public void setProjectCollection1(Collection<Project> projectCollection1) {
-        this.projectCollection1 = projectCollection1;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -228,6 +178,15 @@ public class User implements Serializable {
 
     public void setUsersToModulesCollection(Collection<UsersToModules> usersToModulesCollection) {
         this.usersToModulesCollection = usersToModulesCollection;
+    }
+
+    @XmlTransient
+    public Collection<Project> getProjectCollection() {
+        return projectCollection;
+    }
+
+    public void setProjectCollection(Collection<Project> projectCollection) {
+        this.projectCollection = projectCollection;
     }
     
 }

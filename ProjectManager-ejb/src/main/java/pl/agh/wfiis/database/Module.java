@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +19,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+
 @Entity
 @Table(name = "MODULES")
 @XmlRootElement
@@ -28,13 +28,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Module.findByModuleid", query = "SELECT m FROM Module m WHERE m.moduleid = :moduleid"),
     @NamedQuery(name = "Module.findByTitle", query = "SELECT m FROM Module m WHERE m.title = :title"),
     @NamedQuery(name = "Module.findByDescription", query = "SELECT m FROM Module m WHERE m.description = :description"),
-    @NamedQuery(name = "Module.findByReadmelink", query = "SELECT m FROM Module m WHERE m.readmelink = :readmelink"),
-    @NamedQuery(name = "Module.findByRecruting", query = "SELECT m FROM Module m WHERE m.recruting = :recruting")})
+    @NamedQuery(name = "Module.findByReadmelink", query = "SELECT m FROM Module m WHERE m.readmelink = :readmelink")})
 public class Module implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
-    private Collection<UsersToModules> usersToModulesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
-    private Collection<TechnologiesToModules> technologiesToModulesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,15 +45,13 @@ public class Module implements Serializable {
     @Size(max = 255)
     @Column(name = "READMELINK")
     private String readmelink;
-    @Column(name = "RECRUTING")
-    private Boolean recruting;
-    @ManyToMany(mappedBy = "moduleCollection")
-    private Collection<User> userCollection;
-    @ManyToMany(mappedBy = "moduleCollection")
-    private Collection<Technology> technologyCollection;
     @JoinColumn(name = "PROJECTID", referencedColumnName = "PROJECTID")
     @ManyToOne(optional = false)
     private Project projectid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<UsersToModules> usersToModulesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<TechnologiesToModules> technologiesToModulesCollection;
 
     public Module() {
     }
@@ -99,38 +92,30 @@ public class Module implements Serializable {
         this.readmelink = readmelink;
     }
 
-    public Boolean getRecruting() {
-        return recruting;
-    }
-
-    public void setRecruting(Boolean recruting) {
-        this.recruting = recruting;
-    }
-
-    @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
-    }
-
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
-    }
-
-    @XmlTransient
-    public Collection<Technology> getTechnologyCollection() {
-        return technologyCollection;
-    }
-
-    public void setTechnologyCollection(Collection<Technology> technologyCollection) {
-        this.technologyCollection = technologyCollection;
-    }
-
     public Project getProjectid() {
         return projectid;
     }
 
     public void setProjectid(Project projectid) {
         this.projectid = projectid;
+    }
+
+    @XmlTransient
+    public Collection<UsersToModules> getUsersToModulesCollection() {
+        return usersToModulesCollection;
+    }
+
+    public void setUsersToModulesCollection(Collection<UsersToModules> usersToModulesCollection) {
+        this.usersToModulesCollection = usersToModulesCollection;
+    }
+
+    @XmlTransient
+    public Collection<TechnologiesToModules> getTechnologiesToModulesCollection() {
+        return technologiesToModulesCollection;
+    }
+
+    public void setTechnologiesToModulesCollection(Collection<TechnologiesToModules> technologiesToModulesCollection) {
+        this.technologiesToModulesCollection = technologiesToModulesCollection;
     }
 
     @Override
@@ -156,24 +141,6 @@ public class Module implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Module[ moduleid=" + moduleid + " ]";
-    }
-
-    @XmlTransient
-    public Collection<UsersToModules> getUsersToModulesCollection() {
-        return usersToModulesCollection;
-    }
-
-    public void setUsersToModulesCollection(Collection<UsersToModules> usersToModulesCollection) {
-        this.usersToModulesCollection = usersToModulesCollection;
-    }
-
-    @XmlTransient
-    public Collection<TechnologiesToModules> getTechnologiesToModulesCollection() {
-        return technologiesToModulesCollection;
-    }
-
-    public void setTechnologiesToModulesCollection(Collection<TechnologiesToModules> technologiesToModulesCollection) {
-        this.technologiesToModulesCollection = technologiesToModulesCollection;
     }
     
 }

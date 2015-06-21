@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -19,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @Table(name = "TECHNOLOGIES")
@@ -28,10 +26,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Technology.findByTechnologyid", query = "SELECT t FROM Technology t WHERE t.technologyid = :technologyid"),
     @NamedQuery(name = "Technology.findByName", query = "SELECT t FROM Technology t WHERE t.name = :name")})
 public class Technology implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technologyid")
-    private Collection<UsersToTechnologies> usersToTechnologiesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technologyid")
-    private Collection<TechnologiesToModules> technologiesToModulesCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,13 +35,10 @@ public class Technology implements Serializable {
     @Size(max = 255)
     @Column(name = "NAME")
     private String name;
-    @ManyToMany(mappedBy = "technologyCollection")
-    private Collection<User> userCollection;
-    @JoinTable(name = "TECHNOLOGIES_TO_MODULES", joinColumns = {
-        @JoinColumn(name = "TECHNOLOGYID", referencedColumnName = "TECHNOLOGYID")}, inverseJoinColumns = {
-        @JoinColumn(name = "MODULEID", referencedColumnName = "MODULEID")})
-    @ManyToMany
-    private Collection<Module> moduleCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technologyid")
+    private Collection<UsersToTechnologies> usersToTechnologiesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "technologyid")
+    private Collection<TechnologiesToModules> technologiesToModulesCollection;
 
     public Technology() {
     }
@@ -73,21 +64,21 @@ public class Technology implements Serializable {
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public Collection<UsersToTechnologies> getUsersToTechnologiesCollection() {
+        return usersToTechnologiesCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUsersToTechnologiesCollection(Collection<UsersToTechnologies> usersToTechnologiesCollection) {
+        this.usersToTechnologiesCollection = usersToTechnologiesCollection;
     }
 
     @XmlTransient
-    public Collection<Module> getModuleCollection() {
-        return moduleCollection;
+    public Collection<TechnologiesToModules> getTechnologiesToModulesCollection() {
+        return technologiesToModulesCollection;
     }
 
-    public void setModuleCollection(Collection<Module> moduleCollection) {
-        this.moduleCollection = moduleCollection;
+    public void setTechnologiesToModulesCollection(Collection<TechnologiesToModules> technologiesToModulesCollection) {
+        this.technologiesToModulesCollection = technologiesToModulesCollection;
     }
 
     @Override
@@ -113,24 +104,6 @@ public class Technology implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Technology[ technologyid=" + technologyid + " ]";
-    }
-
-    @XmlTransient
-    public Collection<UsersToTechnologies> getUsersToTechnologiesCollection() {
-        return usersToTechnologiesCollection;
-    }
-
-    public void setUsersToTechnologiesCollection(Collection<UsersToTechnologies> usersToTechnologiesCollection) {
-        this.usersToTechnologiesCollection = usersToTechnologiesCollection;
-    }
-
-    @XmlTransient
-    public Collection<TechnologiesToModules> getTechnologiesToModulesCollection() {
-        return technologiesToModulesCollection;
-    }
-
-    public void setTechnologiesToModulesCollection(Collection<TechnologiesToModules> technologiesToModulesCollection) {
-        this.technologiesToModulesCollection = technologiesToModulesCollection;
     }
     
 }

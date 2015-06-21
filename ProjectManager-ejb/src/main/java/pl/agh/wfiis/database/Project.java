@@ -32,6 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findByPicturelink", query = "SELECT p FROM Project p WHERE p.picturelink = :picturelink"),
     @NamedQuery(name = "Project.findByRecruting", query = "SELECT p FROM Project p WHERE p.recruting = :recruting")})
 public class Project implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
+    private Collection<Module> moduleCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,14 +57,9 @@ public class Project implements Serializable {
     private String picturelink;
     @Column(name = "RECRUTING")
     private Boolean recruting;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
-    private Collection<Module> moduleCollection;
     @JoinColumn(name = "LEADERID", referencedColumnName = "USERID")
     @ManyToOne(optional = false)
     private User leaderid;
-    @JoinColumn(name = "MODERATORID", referencedColumnName = "USERID")
-    @ManyToOne(optional = false)
-    private User moderatorid;
 
     public Project() {
     }
@@ -127,29 +124,12 @@ public class Project implements Serializable {
         this.recruting = recruting;
     }
 
-    @XmlTransient
-    public Collection<Module> getModuleCollection() {
-        return moduleCollection;
-    }
-
-    public void setModuleCollection(Collection<Module> moduleCollection) {
-        this.moduleCollection = moduleCollection;
-    }
-
     public User getLeaderid() {
         return leaderid;
     }
 
     public void setLeaderid(User leaderid) {
         this.leaderid = leaderid;
-    }
-
-    public User getModeratorid() {
-        return moderatorid;
-    }
-
-    public void setModeratorid(User moderatorid) {
-        this.moderatorid = moderatorid;
     }
 
     @Override
@@ -175,6 +155,15 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Project[ projectid=" + projectid + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Module> getModuleCollection() {
+        return moduleCollection;
+    }
+
+    public void setModuleCollection(Collection<Module> moduleCollection) {
+        this.moduleCollection = moduleCollection;
     }
     
 }

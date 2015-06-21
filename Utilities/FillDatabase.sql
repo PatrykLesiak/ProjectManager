@@ -23,13 +23,11 @@ ProjectID int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, I
 Title varchar(255),
 Description varchar(1024),
 LeaderID int NOT NULL,
-ModeratorID int,
 RreadmeLink varchar(255),
 ContactAndLinks varchar(1024),
 PictureLink varchar(255),
-Recruting boolean,
-FOREIGN KEY (LeaderID) REFERENCES Users(UserID),
-FOREIGN KEY (ModeratorID) REFERENCES Users(UserID)
+Recruting boolean DEFAULT True,
+FOREIGN KEY (LeaderID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Technologies
@@ -78,9 +76,9 @@ FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
 
-INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project1', 'More description about project', 1, 2);
-INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project2', 'More description about project', 1, 2);
-INSERT INTO Projects(Title, Description, LeaderID, ModeratorID) VALUES('Test project3', 'More description about project', 1, 2);
+INSERT INTO Projects(Title, Description, LeaderID) VALUES('Test project1', 'More description about project', 1);
+INSERT INTO Projects(Title, Description, LeaderID) VALUES('Test project2', 'More description about project', 1);
+INSERT INTO Projects(Title, Description, LeaderID) VALUES('Test project3', 'More description about project', 1);
 
 INSERT INTO Technologies(Name) VALUES('Java');
 INSERT INTO Technologies(Name) VALUES('JavaEE');
