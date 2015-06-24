@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pl.agh.wfiis.database;
 
 import java.io.Serializable;
@@ -19,6 +24,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Patryk
+ */
 @Entity
 @Table(name = "PROJECTS")
 @XmlRootElement
@@ -32,8 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Project.findByPicturelink", query = "SELECT p FROM Project p WHERE p.picturelink = :picturelink"),
     @NamedQuery(name = "Project.findByRecruting", query = "SELECT p FROM Project p WHERE p.recruting = :recruting")})
 public class Project implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
-    private Collection<Module> moduleCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,6 +64,8 @@ public class Project implements Serializable {
     private String picturelink;
     @Column(name = "RECRUTING")
     private Boolean recruting;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
+    private Collection<Module> moduleCollection;
     @JoinColumn(name = "LEADERID", referencedColumnName = "USERID")
     @ManyToOne(optional = false)
     private User leaderid;
@@ -124,6 +133,15 @@ public class Project implements Serializable {
         this.recruting = recruting;
     }
 
+    @XmlTransient
+    public Collection<Module> getModuleCollection() {
+        return moduleCollection;
+    }
+
+    public void setModuleCollection(Collection<Module> moduleCollection) {
+        this.moduleCollection = moduleCollection;
+    }
+
     public User getLeaderid() {
         return leaderid;
     }
@@ -155,15 +173,6 @@ public class Project implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Project[ projectid=" + projectid + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Module> getModuleCollection() {
-        return moduleCollection;
-    }
-
-    public void setModuleCollection(Collection<Module> moduleCollection) {
-        this.moduleCollection = moduleCollection;
     }
     
 }
