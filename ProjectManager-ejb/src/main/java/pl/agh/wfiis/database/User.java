@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pl.agh.wfiis.database;
 
 import java.io.Serializable;
@@ -18,7 +23,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
+/**
+ *
+ * @author Patryk
+ */
 @Entity
 @Table(name = "USERS")
 @XmlRootElement
@@ -32,12 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByAvatarlink", query = "SELECT u FROM User u WHERE u.avatarlink = :avatarlink"),
     @NamedQuery(name = "User.findByReadmelink", query = "SELECT u FROM User u WHERE u.readmelink = :readmelink")})
 public class User implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private Collection<UsersToTechnologies> usersToTechnologiesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
-    private Collection<UsersToModules> usersToModulesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaderid")
-    private Collection<Project> projectCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +69,12 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "READMELINK")
     private String readmelink;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<UsersToTechnologies> usersToTechnologiesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<UsersToModules> usersToModulesCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaderid")
+    private Collection<Project> projectCollection;
 
     public User() {
     }
@@ -137,31 +145,6 @@ public class User implements Serializable {
         this.readmelink = readmelink;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (userid != null ? userid.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
-            return false;
-        }
-        User other = (User) object;
-        if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "pl.agh.wfiis.database.User[ userid=" + userid + " ]";
-    }
-
     @XmlTransient
     public Collection<UsersToTechnologies> getUsersToTechnologiesCollection() {
         return usersToTechnologiesCollection;
@@ -187,6 +170,31 @@ public class User implements Serializable {
 
     public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (userid != null ? userid.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
+            return false;
+        }
+        User other = (User) object;
+        if ((this.userid == null && other.userid != null) || (this.userid != null && !this.userid.equals(other.userid))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "pl.agh.wfiis.database.User[ userid=" + userid + " ]";
     }
     
 }

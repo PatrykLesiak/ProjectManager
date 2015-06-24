@@ -43,6 +43,7 @@ ProjectID int NOT NULL,
 Title varchar(255),
 Description varchar(1024),
 ReadmeLink varchar(255),
+Recruting boolean DEFAULT True,
 FOREIGN KEY (ProjectID) REFERENCES Projects(ProjectID)
 );
 

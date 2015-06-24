@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pl.agh.wfiis.database;
 
 import java.io.Serializable;
@@ -19,7 +24,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-
+/**
+ *
+ * @author Patryk
+ */
 @Entity
 @Table(name = "MODULES")
 @XmlRootElement
@@ -28,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Module.findByModuleid", query = "SELECT m FROM Module m WHERE m.moduleid = :moduleid"),
     @NamedQuery(name = "Module.findByTitle", query = "SELECT m FROM Module m WHERE m.title = :title"),
     @NamedQuery(name = "Module.findByDescription", query = "SELECT m FROM Module m WHERE m.description = :description"),
-    @NamedQuery(name = "Module.findByReadmelink", query = "SELECT m FROM Module m WHERE m.readmelink = :readmelink")})
+    @NamedQuery(name = "Module.findByReadmelink", query = "SELECT m FROM Module m WHERE m.readmelink = :readmelink"),
+    @NamedQuery(name = "Module.findByRecruting", query = "SELECT m FROM Module m WHERE m.recruting = :recruting")})
 public class Module implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -45,6 +54,8 @@ public class Module implements Serializable {
     @Size(max = 255)
     @Column(name = "READMELINK")
     private String readmelink;
+    @Column(name = "RECRUTING")
+    private Boolean recruting;
     @JoinColumn(name = "PROJECTID", referencedColumnName = "PROJECTID")
     @ManyToOne(optional = false)
     private Project projectid;
@@ -90,6 +101,14 @@ public class Module implements Serializable {
 
     public void setReadmelink(String readmelink) {
         this.readmelink = readmelink;
+    }
+
+    public Boolean getRecruting() {
+        return recruting;
+    }
+
+    public void setRecruting(Boolean recruting) {
+        this.recruting = recruting;
     }
 
     public Project getProjectid() {
