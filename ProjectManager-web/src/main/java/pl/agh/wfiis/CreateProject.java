@@ -125,7 +125,7 @@ public class CreateProject implements Serializable {
         logger.info("Wazne: " +  project.getRecruting().toString());
         
         webBeanProject.setTitle(project.getTitle());
-        //webBeanProject.setPictureLink(project.getPicturelink());  // Tutaj pobierany z bazy jest NULL, tak byc nie moze
+        webBeanProject.setPictureLink(project.getPicturelink());
         return webBeanProject;
     }
     public void setRandomProjectList(List<CreateProject> list){

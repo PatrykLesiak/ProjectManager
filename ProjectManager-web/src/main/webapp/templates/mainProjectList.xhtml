@@ -19,11 +19,11 @@
                <ui:repeat value="#{createProject.randomProjectList}" var="randomProject">
           <tr><td>
         <div class="col-md-4"><a href="#">
-            <img src="#{randomProject.pictureLink}" class="img-circle"></img>
+                <img src="#{randomProject.pictureLink}" class="img-circle" width="300" height="300"></img>
         </a>
         </div>
         <div class="col-md-8">
-            <h2><a href="#">#{randomProject.title}</a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting}">Recruting</h:panelGroup></h2>
+            <h2><a href="#">#{randomProject.title} </a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting}">Recruting</h:panelGroup></h2>
             <p>#{randomProject.description}</p>
             <!--<ui:repeat value="#randomProject.technologies" var="technology" rendered="#not empty randomProject.technologies">
                 <h:panelGroup class="label label-primary"> technology.name </h:panelGroup>
