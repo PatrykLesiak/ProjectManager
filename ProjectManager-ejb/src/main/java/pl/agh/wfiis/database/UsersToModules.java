@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@Entity
+    @Entity
 @Table(name = "USERS_TO_MODULES")
 @XmlRootElement
 @NamedQueries({

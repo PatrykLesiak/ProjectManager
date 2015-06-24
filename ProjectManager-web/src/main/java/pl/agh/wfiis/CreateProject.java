@@ -25,6 +25,7 @@ public class CreateProject implements Serializable {
     private String description;
     private String readmeLink;
     private Boolean recruting;
+    private Project projectById;
     private String contactsAndLinks;
     private String pictureLink;
     private List<CreateProject> randomProjectList;
@@ -153,5 +154,13 @@ public class CreateProject implements Serializable {
      */
     public void setRecruting(Boolean recruting) {
         this.recruting = recruting;
+    }
+    
+    public Project getProjectById(int id){
+        return projectDatabaseControler.getProjectByID(id);
+    }
+    
+    public void setProjectById(Project id){
+        this.projectById = id;
     }
 }

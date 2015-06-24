@@ -5,18 +5,21 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
-        <ui:composition>   
+         <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content"> 
             <div class="container-fluid">
                 <br></br>
                 <div class="row span7 text-center"> 
-                    <h2>Open source lightbulb</h2>
-                    <img src="http://www.yourenergyblog.com/wp-content/uploads/2013/01/incandescent-bulb1-300x300.png" class="img-circle"></img>
-                    <h2><button type="button" class="btn btn-success btn-large">
-                            Apply
-                        </button></h2>
+                    <c:set var="projekt" value="#{createProject.getProjectById(1)}" />
+                    <h2>#{projekt.getTitle()}</h2>
+                    <img src="#{projekt.getPicturelink()}" class="img-circle" height="300" size="300"></img>
+                    <h2><h:button rendered="#{projekt.getRecruting()}" class="btn btn-success btn-large" value="Apply">
+                        </h:button></h2>
                 </div>
                 <br></br>
                 </div>
@@ -25,38 +28,22 @@
                     <div class="col-md-4">
                         <div class="row">
                             <h3>Tag cloud:</h3>
-                            <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
-                            <span class="label label-default">Server administrator</span>
-                            <span class="label label-default">Tornado</span>
-                            <span class="label label-default">JavaScript</span>
-                            <span class="label label-default">Management</span>
+                            <ui:repeat value="#{totalProjectAttributes.getTotalTechnology(projekt.projectid)}" var="technology">
+                                <span class="label label-default">#{technology.getName()}</span>
+                            </ui:repeat>
 
                         </div>
                         <div class="row">
                       
                                 <h4>People:</h4>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                                <img src="http://historyk.eu/img/avatar.png" class="img-rounded" height="50" width="50"></img>
-                    
+                                <ui:repeat value="#{totalProjectAttributes.getTotalPeople(projekt.getProjectid())}" var="czlek">
+                                    <img src="#{czlek.getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getFirstname()}"></img>
+                                 </ui:repeat>
                         </div>
                         <div class="row">
                                 <h4>Contact and links</h4>
                                 <ul>
-                                    <li>Github: <a href="#">Lorem ipsum dolor sit amet</a></li>
-                                    <li>Kickstarter: <a href="#">Lorem ipsum dolor sit amet</a></li>
-                                    <li><a href="#">Lorem ipsum dolor sit amet</a></li>
+                                    #{projekt.getContactandlinks()}
                                 </ul>
                    
                         </div>
@@ -65,9 +52,7 @@
 
                     <div class="col-md-8">
                         <h3>About project:</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
-
-                            Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
+                        <p>#{projekt.getDescription()}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -85,61 +70,26 @@
                 <br></br>
                 </div>
                 <div class="row">
-                    
-                    <div class="col-md-4">
-                        <div class="card">
-                        <a href="#" class="cardlink">
-                        <h2 class="text-center">Modulname</h2>
-                        <p>In order to join the project, set up new one, or find people you need to register</p>
-                         </a>
-                            <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
-                        <br> </br>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                        <a href="#" class="cardlink">
-                        <h2 class="text-center">Modulname</h2>
-                        <p>In order to join the project, set up new one, or find people you need to register</p>
-                         </a>
-                            <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
-                        <br> </br>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                        <a href="#" class="cardlink">
-                        <h2 class="text-center">Modulname</h2>
-                        <p>In order to join the project, set up new one, or find people you need to register</p>
-                         </a>
-                            <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
-                        <br> </br>
-                        </div>
-                    </div>
+                <ui:repeat value="#{totalProjectAttributes.getTotalModules(projekt.getProjectid())}" var="module">                
                     <div class="col-md-4">
                         <div class="card closed">
-                        <h2 class="text-center">Modulname</h2>
-                        <p>In order to join the project, set up new one, or find people you need to register</p>
-                        <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
+                        <a href="#" class="cardlink">
+                        <h2 class="text-center">module.getName()</h2>
+                        <p>module.getDescription()</p>
+                         </a>
+                            <ui:repeat value="#{totalModuleAttributes.getTechnologyList(module.moduleid)}" var="technologyUsers">
+                            <span class="label label-default">#{technologyUsers.getName()}</span>
+                            </ui:repeat>
                         <br> </br>
                         </div>
-                           
-                    </div><div class="col-md-4">
-                        <div class="card closed">
-                        <h2 class="text-center">Modulname</h2>
-                        <p>In order to join the project, set up new one, or find people you need to register</p>
-                        <span class="label label-default">Django</span>
-                            <span class="label label-primary">Leadership</span>
-                        <br> </br>
-                        </div>
+                    </div>
+                </ui:repeat>
+
                     </div>
                 </div>
 
-            </div>
+            
+            </ui:define>
         </ui:composition>
     </body>
 

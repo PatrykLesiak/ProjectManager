@@ -53,4 +53,7 @@ public class ProjectDatabaseController {
         logger.info("New project should be registrated in the database");
     }
     
+    public Project getProjectByID(int Id){
+        return projectFacade.find(Id);
+    }
 }
