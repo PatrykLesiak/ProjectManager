@@ -53,6 +53,8 @@ public class TotalModuleAttributes implements Serializable {
      * @return the technologyList
      */
     public List<Technology> getTechnologyList(int id) {
+        this.technologyList = new ArrayList<>();
+        if (id == 0) return this.technologyList;
         Module m = moduleDatabaseControler.getModule(id);
         for(TechnologiesToModules um : m.getTechnologiesToModulesCollection()){
             this.technologyList.add(um.getTechnologyid());

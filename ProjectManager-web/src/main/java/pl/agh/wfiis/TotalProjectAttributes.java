@@ -88,9 +88,11 @@ public class TotalProjectAttributes implements Serializable {
      */
     public List<Technology> getTotalTechnology(int id) {
         Project p = projectDatabaseControler.getProjectByID(id);
+        this.totalTechnology = new ArrayList<>();
         for(Module m : p.getModuleCollection()){
             for(TechnologiesToModules um : m.getTechnologiesToModulesCollection()){
-                this.totalTechnology.add(um.getTechnologyid());
+                Technology t = um.getTechnologyid();
+                this.totalTechnology.add(t);
             }
         }
         return this.totalTechnology;
