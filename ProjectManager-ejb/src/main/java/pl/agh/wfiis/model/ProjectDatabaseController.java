@@ -1,20 +1,20 @@
 package pl.agh.wfiis.model;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
+import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
+import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.facades.ProjectFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.database.User;
+import pl.agh.wfiis.facades.ModuleFacade;
+import pl.agh.wfiis.facades.TechnologyFacade;
 
 
 @Stateless
@@ -29,12 +29,17 @@ public class ProjectDatabaseController {
     @EJB 
     private UserFacade userFacade;
     
+    @EJB
+    private ModuleFacade moduleFacade;
+    
+    @EJB
+    private TechnologyFacade technologyFacade;
+    
     public List<Project> getAllProjects() {
         List<Project> listOfAllProjects = projectFacade.findAll();      
         return listOfAllProjects;
     }
-    
-        
+         
     public List<Project> getRandomProjects(int number) {
         int projectCount = projectFacade.count();
         List<Project> listOfRandomProjects = new ArrayList<>();
@@ -55,5 +60,13 @@ public class ProjectDatabaseController {
     
     public Project getProjectByID(int Id){
         return projectFacade.find(Id);
+    }
+    
+    public Module getModuleByID(int Id) {
+        return moduleFacade.find(Id);
+    }
+    
+    public Technology getTechnologyid(int Id) {
+        return technologyFacade.find(Id);
     }
 }

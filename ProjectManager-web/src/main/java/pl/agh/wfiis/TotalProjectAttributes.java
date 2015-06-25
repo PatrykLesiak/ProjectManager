@@ -19,7 +19,6 @@ import pl.agh.wfiis.database.TechnologiesToModules;
 import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.UsersToModules;
-import pl.agh.wfiis.model.ModuleDatabaseController;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
 /**
@@ -32,7 +31,6 @@ public class TotalProjectAttributes implements Serializable {
 
     @EJB
     private ProjectDatabaseController projectDatabaseControler;
-    private ModuleDatabaseController moduleDatabaseControler;
     
     Logger logger = Logger.getLogger(getClass().getName());
     

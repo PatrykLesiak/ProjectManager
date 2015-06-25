@@ -9,13 +9,16 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.ejb.EJB;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.TechnologiesToModules;
 import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.UsersToModules;
-import pl.agh.wfiis.model.ModuleDatabaseController;
+import pl.agh.wfiis.model.ProjectDatabaseController;
 
 /**
  *
@@ -25,15 +28,20 @@ import pl.agh.wfiis.model.ModuleDatabaseController;
 @SessionScoped
 public class TotalModuleAttributes implements Serializable {
 
-    private ModuleDatabaseController moduleDatabaseControler;
+    @EJB
+    private ProjectDatabaseController projectDatabaseController;
+    
     private List<User> userList;
     private List<Technology> technologyList;
 
+    Logger logger = Logger.getLogger(getClass().getName());
+    private Object Iterables;
+    
     /**
      * @return the userList
      */
     public List<User> getUserList(int id) {
-        Module m = moduleDatabaseControler.getModule(id);
+        Module m = projectDatabaseController.getModuleByID(id);
         this.userList = new ArrayList<>();
         for(UsersToModules um : m.getUsersToModulesCollection())
         {
@@ -54,6 +62,7 @@ public class TotalModuleAttributes implements Serializable {
      */
     public List<Technology> getTechnologyList(int id) {
         this.technologyList = new ArrayList<>();
+        
        if (id == 0){
            List<Technology> lt = new ArrayList();
            Technology t = new Technology();
@@ -61,9 +70,10 @@ public class TotalModuleAttributes implements Serializable {
            lt.add(t);
            return lt;
        }
-        Module m = moduleDatabaseControler.getModule(id);
+        Module m = projectDatabaseController.getModuleByID(id);
+        
         for(TechnologiesToModules um : m.getTechnologiesToModulesCollection()){
-            this.technologyList.add(um.getTechnologyid());
+            technologyList.add(um.getTechnologyid());
         }
         return technologyList;
     }
