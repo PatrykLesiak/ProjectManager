@@ -78,7 +78,7 @@
                         <p>module.getDescription()</p>
                          </a>
                             <c:set value="#{module.getModuleid()}" var="mid" />
-                            <ui:repeat value="#{totalModuleAttributes.getTechnologyList(mid)}" var="technologyUsers" rendered="#{not empty technologyUsers}">
+                            <ui:repeat value="#{totalModuleAttributes.getTechnologyList(mid)}" var="technologyUsers">
                             <span class="label label-default">#{technologyUsers.getName()}</span>
                             </ui:repeat>
                         <br> </br>
