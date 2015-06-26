@@ -103,4 +103,8 @@ public class TotalProjectAttributes implements Serializable {
         this.totalTechnology = totalTechnology;
     }
     
+    public static String boolToClassText(boolean val){
+        return val ? "": "closed";
+    }
+    
 }

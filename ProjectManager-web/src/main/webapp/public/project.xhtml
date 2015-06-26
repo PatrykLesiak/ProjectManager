@@ -57,12 +57,9 @@
                 </div>
                 <div class="row">
                             <div class="col-md-12">
-                                <h3>More about: (textfile)</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
-                                    Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis, elit non luctus porta, risus sem lacinia nisi, ac sagittis ipsum arcu sit amet sapien. Nullam blandit facilisis nisl. Nulla facilisi. Pellentesque fringilla tortor rhoncus enim posuere vulputate. Vestibulum at gravida elit, eu sodales tortor. Nulla ac diam vel diam congue dapibus. Ut at nunc quis nulla gravida sollicitudin. Integer rhoncus risus et urna placerat, a venenatis risus condimentum.
-                                    Duis faucibus sapien quis malesuada rhoncus. Nulla facilisi. Nam sed lacus tincidunt, egestas orci eget, porttitor tellus. Maecenas eros libero, suscipit eget massa ac, consectetur finibus nulla. Cras tincidunt libero in quam rhoncus, laoreet laoreet urna eleifend. Donec sit amet mattis justo. Morbi a venenatis lorem. Phasellus a odio in dolor sodales dignissim sed id mi. Nunc interdum fermentum suscipit.</p>
-                            </div>
+                                <h3>More about:</h3>
+                                <span id="main_info">#{projekt.getRreadmelink()}</span>
+                           </div>
                         </div>
                 <br></br>
                 <div class="row">
@@ -72,10 +69,10 @@
                 <div class="row">
                 <ui:repeat value="#{totalProjectAttributes.getTotalModules(projekt.getProjectid())}" var="module">                
                     <div class="col-md-4">
-                        <div class="card closed">
+                        <div class="card #{totalProjectAttributes.boolToClassText(module.getRecruting())}">
                         <a href="#" class="cardlink">
-                        <h2 class="text-center">module.getName()</h2>
-                        <p>module.getDescription()</p>
+                        <h2 class="text-center">#{module.getTitle()}</h2>
+                        <p>#{module.getDescription()}</p>
                          </a>
                             <c:set value="#{module.getModuleid()}" var="mid" />
                             <ui:repeat value="#{totalModuleAttributes.getTechnologyList(mid)}" var="technologyUsers">
