@@ -106,5 +106,8 @@ public class TotalProjectAttributes implements Serializable {
     public static String boolToClassText(boolean val){
         return val ? "": "closed";
     }
-    
+    public List<Project> getRandomProjectList(){
+        int number = 3;
+        return projectDatabaseControler.getRandomProjects(number);
+    }
 }

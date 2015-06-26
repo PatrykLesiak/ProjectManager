@@ -15,11 +15,13 @@
         
             <div class="container-fluid">
                 <br></br>
-                <c:set var="module" value="#{totalModuleAttributes.getModuleById(1)}" />
+                <c:set var="module" value="#{totalModuleAttributes.getModuleById(param['id'])}" />
                 <div class="row span7 text-center"> 
+                    <h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{module.getProjectid().getProjectid()}">
                     <h2>#{module.getProjectid().getTitle()}</h2>
                     
                     <img src="#{module.getProjectid().getPicturelink()}" height="300" width="300" class="img-circle"></img>
+                    </h:outputLink>
                     <h2><h:button rendered="#{module.getRecruting()}" class="btn btn-success btn-large" value="Apply">
                         </h:button></h2>
                 </div>
@@ -54,7 +56,7 @@
                 <div class="row">
                             <div class="col-md-12">
                                 <h3>More about: (textfile)</h3>
-                                    <span id="main_info">#{module.getReadmelink()}</span>
+                                    <span id="m">#{textFetcher.getTextFromUrl(module.getReadmelink())}</span>
                             </div>
                         </div>
                 <br></br>

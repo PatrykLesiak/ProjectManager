@@ -15,7 +15,7 @@
             <div class="container-fluid">
                 <br></br>
                 <div class="row span7 text-center"> 
-                    <c:set var="projekt" value="#{createProject.getProjectById(1)}" />
+                    <c:set var="projekt" value="#{createProject.getProjectById(param['id'])}" />
                     <h2>#{projekt.getTitle()}</h2>
                     <img src="#{projekt.getPicturelink()}" class="img-circle" height="300" size="300"></img>
                     <h2><h:button rendered="#{projekt.getRecruting()}" class="btn btn-success btn-large" value="Apply">
@@ -37,7 +37,9 @@
                       
                                 <h4>People:</h4>
                                 <ui:repeat value="#{totalProjectAttributes.getTotalPeople(projekt.getProjectid())}" var="czlek">
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{czel.getUserid()}">
                                     <img src="#{czlek.getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getFirstname()}"></img>
+                                    </h:outputLink>
                                  </ui:repeat>
                         </div>
                         <div class="row">
@@ -58,7 +60,7 @@
                 <div class="row">
                             <div class="col-md-12">
                                 <h3>More about:</h3>
-                                <span id="main_info">#{projekt.getRreadmelink()}</span>
+                                <span id="m">#{textFetcher.getTextFromUrl(projekt.getRreadmelink())}</span>
                            </div>
                         </div>
                 <br></br>
@@ -70,9 +72,9 @@
                 <ui:repeat value="#{totalProjectAttributes.getTotalModules(projekt.getProjectid())}" var="module">                
                     <div class="col-md-4">
                         <div class="card #{totalProjectAttributes.boolToClassText(module.getRecruting())}">
-                        <a href="#" class="cardlink">
+                       <h:outputLink value="/ProjectManager-web/faces/public/module.xhtml?id=#{module.getModuleid()}" class="cardlink">
                         <h2 class="text-center">#{module.getTitle()}</h2>
-                         </a>
+                       </h:outputLink>
                         <p>#{module.getDescription()}</p>
                         
                             <c:set value="#{module.getModuleid()}" var="mid" />

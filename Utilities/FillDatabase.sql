@@ -74,23 +74,23 @@ FOREIGN KEY (UserID) REFERENCES Users(UserID),
 FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 );
 
-INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink) VALUES 
+INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
  'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-'');
+'', 'http://www.adtechnology.co.uk/images/UGM-default-user.png');
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink) VALUES 
 ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl',
  'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
 '');
 
-INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Test project1',
- 'some short text about project 1, its eyecatching description', 1,
+INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Open source lightbulb',
+ 'We are making open source lightbulb ! Join us and say "no more" to lightbulb scam', 1,
 'http://ritterlumber.net/wp-content/uploads/2013/12/incandescent-lightbulb.jpg',
-'https://raw.githubusercontent.com/MM-PITE/first_project/master/README.md');
-INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Test project2',
-'some short text about project 2, its eyecatching description', 1,
-'http://ritterlumber.net/wp-content/uploads/2013/12/incandescent-lightbulb.jpg',
-'https://raw.githubusercontent.com/MM-PITE/first_project/master/README.md');
+'http://wklej.org/id/1746849/txt/');
+INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Jarvis AI',
+'An AI from Iron-Man. We are making future "butler AI"', 1,
+'http://media.comicbook.com/wp-content/uploads/2011/11/jarvis-avengers.jpg',
+'http://wklej.org/id/1746851/txt/');
 INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Test project3',
 'some short text about project 3, its eyecatching description', 1,
 'http://ritterlumber.net/wp-content/uploads/2013/12/incandescent-lightbulb.jpg',
@@ -105,7 +105,7 @@ INSERT INTO Technologies(Name) VALUES('Python');
 INSERT INTO Technologies(Name) VALUES('Ruby');
 INSERT INTO Technologies(Name) VALUES('SQL');
 
-INSERT INTO Modules(ProjectID, Title, Description, ReadmeLink) VALUES (1, 'Baza danych SQL', 'Zrobic baze danych', 'http://www.google.pl');
+INSERT INTO Modules(ProjectID, Title, Description, ReadmeLink) VALUES (1, 'Baza danych SQL', 'Zrobic baze danych', '');
 
 INSERT INTO Users_to_Technologies(UserID, TechnologyID) VALUES (1, 2);
 INSERT INTO Users_to_Technologies (UserID, TechnologyID) VALUES (2, 1);

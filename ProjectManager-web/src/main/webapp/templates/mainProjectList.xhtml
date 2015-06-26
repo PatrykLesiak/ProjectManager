@@ -14,27 +14,32 @@
   <h1>Check out these projects!</h1>
 </div>
            <br></br>
-
+           <div class="row">
            <table class="table table-hover">
-               <ui:repeat value="#{createProject.randomProjectList}" var="randomProject">
+               <ui:repeat value="#{totalProjectAttributes.getRandomProjectList()}" var="randomProject">
           <tr><td>
-        <div class="col-md-4"><a href="#">
-                <img src="#{randomProject.pictureLink}" class="img-circle" width="300" height="300"></img>
-        </a>
+        <div class="col-md-2 text-center">
+            <h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{randomProject.getProjectid()}">
+                <img src="#{randomProject.getPicturelink()}" class="img-circle" width="100" height="100"></img>
+            </h:outputLink>
+           
         </div>
+                  
         <div class="col-md-8">
-            <h2><a href="#">#{randomProject.title} </a><h:panelGroup class="label label-success" rendered="#{randomProject.recruting}">Recruting</h:panelGroup></h2>
-            <p>#{randomProject.description}</p>
+            <h2><h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{randomProject.getProjectid()}">
+                #{randomProject.getTitle()}
+            </h:outputLink><h:panelGroup class="label label-success" rendered="#{randomProject.getRecruting()}">Recruting</h:panelGroup></h2>
+            <p>#{randomProject.getDescription()}</p>
             <!--<ui:repeat value="#randomProject.technologies" var="technology" rendered="#not empty randomProject.technologies">
                 <h:panelGroup class="label label-primary"> technology.name </h:panelGroup>
             </ui:repeat>-->
     </div></td>
   </tr>
-
+ 
 </ui:repeat>
 
 
-    </table>
+    </table></div>
            <br></br>
              
   <div class="span7 text-center"> <button class="btn btn-large btn-primary" type="button">More projects</button></div>

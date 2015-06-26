@@ -118,29 +118,9 @@ public class CreateProject implements Serializable {
         
         return "/index";
     }
-    public CreateProject fromProject(Project project){
-        CreateProject webBeanProject = new CreateProject();
-        webBeanProject.setContactsAndLinks(project.getContactandlinks());
-        webBeanProject.setDescription(project.getDescription());
-        webBeanProject.setRecruting(project.getRecruting());
-        logger.info("Wazne: " +  project.getRecruting().toString());
-        
-        webBeanProject.setTitle(project.getTitle());
-        webBeanProject.setPictureLink(project.getPicturelink());
-        return webBeanProject;
-    }
-    public void setRandomProjectList(List<CreateProject> list){
-        this.randomProjectList = list;
-    }
+ 
     
-    public List<CreateProject> getRandomProjectList(){
-        int number = 3;
-        randomProjectList = new ArrayList<>();
-        for (Project project : projectDatabaseControler.getRandomProjects(number)) {
-            randomProjectList.add(fromProject(project));
-        }
-        return randomProjectList;
-    }
+ 
 
     /**
      * @return the recruting
