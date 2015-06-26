@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content"> 
+        
+            <div class="container-fluid">
+                <br></br>
+                <c:set var="module" value="#{totalModuleAttributes.getModuleById(1)}" />
+                <div class="row span7 text-center"> 
+                    <h2>#{module.getProjectid().getTitle()}</h2>
+                    
+                    <img src="#{module.getProjectid().getPicturelink()}" height="300" width="300" class="img-circle"></img>
+                    <h2><h:button rendered="#{module.getRecruting()}" class="btn btn-success btn-large" value="Apply">
+                        </h:button></h2>
+                </div>
+                <br></br>
+                </div>
+            <div class="container ">
+                <div class="row text-center"><h3>Module: #{module.getTitle()}</h3></div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <h3>Tag cloud:</h3>
+                            <ui:repeat value="#{totalModelAttributes.getTotalTechnology(model.getModelid())}" var="technology">
+                                <span class="label label-default">#{technology.getName()}</span>
+                            </ui:repeat>
+
+                        </div>
+                        <div class="row">
+                      
+                                <h4>People:</h4>
+                                <ui:repeat value="#{totalModuleAttributes.getUserList(module.getModuleid())}" var="czlek">
+                                    <img src="#{czlek.getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getFirstname()}"></img>
+                                 </ui:repeat>       
+                        </div>
+                    </div>
+                      
+                    <div class="col-md-8">
+                        <h3>About Module:</h3>
+                            <p>#{module.getDescription()}</p>
+                    </div>
+                </div>
+                <div class="row">
+                            <div class="col-md-12">
+                                <h3>More about: (textfile)</h3>
+                                    <span id="main_info">#{module.getReadmelink()}</span>
+                            </div>
+                        </div>
+                <br></br>
+                
+            </div>
+                </ui:define>
+        </ui:composition>
+    </body>
+
+</html>

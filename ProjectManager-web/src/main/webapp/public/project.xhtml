@@ -72,8 +72,9 @@
                         <div class="card #{totalProjectAttributes.boolToClassText(module.getRecruting())}">
                         <a href="#" class="cardlink">
                         <h2 class="text-center">#{module.getTitle()}</h2>
-                        <p>#{module.getDescription()}</p>
                          </a>
+                        <p>#{module.getDescription()}</p>
+                        
                             <c:set value="#{module.getModuleid()}" var="mid" />
                             <ui:repeat value="#{totalModuleAttributes.getTechnologyList(mid)}" var="technologyUsers">
                             <span class="label label-default">#{technologyUsers.getName()}</span>
