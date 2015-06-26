@@ -37,7 +37,7 @@
                       
                                 <h4>People:</h4>
                                 <ui:repeat value="#{totalProjectAttributes.getTotalPeople(projekt.getProjectid())}" var="czlek">
-                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{czel.getUserid()}">
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{czlek.getUserid()}">
                                     <img src="#{czlek.getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getFirstname()}"></img>
                                     </h:outputLink>
                                  </ui:repeat>
