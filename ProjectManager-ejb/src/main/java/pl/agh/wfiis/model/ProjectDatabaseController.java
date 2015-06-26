@@ -69,4 +69,8 @@ public class ProjectDatabaseController {
     public Technology getTechnologyid(int Id) {
         return technologyFacade.find(Id);
     }
+    
+    public User getUserById(int id){
+        return userFacade.find(id);
+    }
 }

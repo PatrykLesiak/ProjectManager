@@ -74,8 +74,14 @@ FOREIGN KEY (UserID) REFERENCES Users(UserID),
 FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 );
 
-INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
-INSERT INTO Users (LastName, FirstName, Email, Password) VALUES ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855');
+INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink) VALUES 
+('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
+ 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+'');
+INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink) VALUES 
+('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl',
+ 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+'');
 
 INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Test project1',
  'some short text about project 1, its eyecatching description', 1,

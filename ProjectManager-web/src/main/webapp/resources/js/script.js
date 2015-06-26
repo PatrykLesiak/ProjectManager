@@ -6,7 +6,7 @@
 
 $(document).ready(
         function(){
-            if ($("#main_info").length){
+            if ($("#main_info").length && $("#main_info").text() !== ""){
                 var link = $("#main_info").text();
                 var request_text = $.get(link,function(data){$("#main_info").text(data);});
                 
