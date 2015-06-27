@@ -5,6 +5,7 @@ DROP TABLE Technologies;
 DROP TABLE Modules;
 DROP TABLE Projects;
 DROP TABLE Users;
+DROP TABLE Roles;
 
 CREATE TABLE Users
 (
@@ -73,6 +74,15 @@ ModuleID int NOT NULL,
 FOREIGN KEY (UserID) REFERENCES Users(UserID),
 FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 );
+
+CREATE TABLE USERS_GROUPS
+(
+GROUPID VARCHAR(20) NOT NULL,
+USERID VARCHAR(255) NOT NULL,
+PRIMARY KEY (`GROUPID`)
+);
+
+
 
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
