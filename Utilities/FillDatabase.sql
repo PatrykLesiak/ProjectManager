@@ -5,7 +5,7 @@ DROP TABLE Technologies;
 DROP TABLE Modules;
 DROP TABLE Projects;
 DROP TABLE Users;
-DROP TABLE Roles;
+DROP TABLE USERS_GROUPS;
 
 CREATE TABLE Users
 (
@@ -82,7 +82,7 @@ USERID VARCHAR(255) NOT NULL,
 PRIMARY KEY (`GROUPID`)
 );
 
-
+INSERT INTO USERS_GROUPS(GROUPID, USERID) VALUES ('loggedUser', 'patryk.lesiak@patryk.pl');
 
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
