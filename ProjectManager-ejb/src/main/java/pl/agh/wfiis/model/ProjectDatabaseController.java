@@ -15,6 +15,7 @@ import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.facades.ProjectFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.database.User;
+import pl.agh.wfiis.database.UsersToModules;
 import pl.agh.wfiis.facades.ModuleFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
 
@@ -139,6 +140,17 @@ public class ProjectDatabaseController {
         Technology t = technologyFacade.find(id);
         HashSet<Project> projectDictionary = new HashSet<>();
         for(TechnologiesToModules ttm :t.getTechnologiesToModulesCollection()){
+            projectDictionary.add(ttm.getModuleid().getProjectid());
+        }
+        List<Project> list = new ArrayList<>(projectDictionary);
+        return list;
+    }
+    
+    public List<Project> getProjectListByUserId(int id){
+        User u = userFacade.find(id);
+        
+        HashSet<Project> projectDictionary = new HashSet<>();
+        for(UsersToModules ttm : u.getUsersToModulesCollection()){
             projectDictionary.add(ttm.getModuleid().getProjectid());
         }
         List<Project> list = new ArrayList<>(projectDictionary);

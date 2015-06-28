@@ -4,9 +4,11 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.security.Principal;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 import pl.agh.wfiis.model.UserDatabaseController;
@@ -42,6 +44,10 @@ public class TotalUserAttributes implements Serializable {
      */
     public User getUserById(int id){
         return projectDatabaseControler.getUserById(id);
+    }
+    
+    public List<Project> getUserProjectListById(int id){
+        return projectDatabaseControler.getProjectListByUserId(id);
     }
     
     /**
