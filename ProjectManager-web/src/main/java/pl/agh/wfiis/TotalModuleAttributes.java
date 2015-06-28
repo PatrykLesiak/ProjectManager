@@ -8,6 +8,7 @@ package pl.agh.wfiis;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -89,4 +90,5 @@ public class TotalModuleAttributes implements Serializable {
         Module m = projectDatabaseController.getModuleByID(id);
         return m;
     }
+   
 }

@@ -4,8 +4,10 @@ DROP TABLE Technologies_to_Modules;
 DROP TABLE Technologies;
 DROP TABLE Modules;
 DROP TABLE Projects;
-DROP TABLE Users;
+DROP VIEW v_user_role;
 DROP TABLE USERS_GROUPS;
+DROP TABLE Users;
+DROP TABLE Groups;
 
 CREATE TABLE Users
 (
@@ -75,22 +77,36 @@ FOREIGN KEY (UserID) REFERENCES Users(UserID),
 FOREIGN KEY (ModuleID) REFERENCES Modules(ModuleID)
 );
 
-CREATE TABLE USERS_GROUPS
+CREATE TABLE Groups
 (
-GROUPID VARCHAR(20) NOT NULL,
-USERID VARCHAR(255) NOT NULL,
-PRIMARY KEY (`GROUPID`)
+group_id int PRIMARY KEY NOT NULL,
+group_name varchar(20) NOT NULL
 );
 
-INSERT INTO USERS_GROUPS(GROUPID, USERID) VALUES ('loggedUser', 'patryk.lesiak@patryk.pl');
+CREATE TABLE USERS_GROUPS
+(
+user_id int NOT NULL,
+group_id int NOT NULL, 
+PRIMARY KEY (user_id,group_id),
+FOREIGN KEY (group_id) REFERENCES Groups (group_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+FOREIGN KEY (user_id) REFERENCES Users (UserID) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE VIEW v_user_role AS
+SELECT  u.Email, u.Password, g.group_name
+ FROM USERS_GROUPS ug
+ INNER JOIN Users u ON u.UserID = ug.user_id
+ INNER JOIN Groups g ON g.group_id =  ug.group_id; 
+
 
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
- 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+ '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',
 '', 'http://www.adtechnology.co.uk/images/UGM-default-user.png');
+
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Lesiak', 'Patryk', 'patryk.lesiak@patryk.pl',
- 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+ '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918',
 '', 'https://cdn0.iconfinder.com/data/icons/iVista2/256/User.png');
 
 INSERT INTO Projects(Title, Description, LeaderID, PictureLink, RreadmeLink) VALUES('Open source lightbulb',
@@ -157,3 +173,7 @@ INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(1,4);
 INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(1,5);
 INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(2,6);
 INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(2,3);
+
+INSERT INTO Groups(group_id,group_name) VALUES (1,'loggedUser');
+INSERT INTO USERS_GROUPS VALUES (1, 1),
+								(2, 1);

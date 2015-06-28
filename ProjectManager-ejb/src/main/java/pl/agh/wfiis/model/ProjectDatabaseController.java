@@ -16,30 +16,58 @@ import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.facades.ModuleFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
 
-
+/**
+ * Stateless bean for all kind of operations on the database connected with registered projects.
+ */
 @Stateless
 @LocalBean
 public class ProjectDatabaseController {
-
+    
+    /**
+     * Logger object for log operations which facilitates development process.
+     */
     Logger logger = Logger.getLogger(getClass().getName());
     
+    /**
+     * Facade to database for Project class.
+     */
     @EJB
     private ProjectFacade projectFacade;
     
+    /**
+     * Facade to database for User class.
+     */
     @EJB 
     private UserFacade userFacade;
     
+    /**
+     * Facade to database for Module class.
+     */
     @EJB
     private ModuleFacade moduleFacade;
     
+    /**
+     * Facade to database for Techbnology class.
+     */
     @EJB
     private TechnologyFacade technologyFacade;
     
+    /**
+     * Retrieves registered projects from the database.
+     * 
+     * @return List of registered projects.
+     */
     public List<Project> getAllProjects() {
         List<Project> listOfAllProjects = projectFacade.findAll();      
         return listOfAllProjects;
     }
          
+    /**
+     * Functin returns random project list from the database.
+     * 
+     * @param number    Number of projects to be returned.
+     * @return          List of random registered projects. 
+     */
     public List<Project> getRandomProjects(int number) {
         int projectCount = projectFacade.count();
         List<Project> listOfRandomProjects = new ArrayList<>();
@@ -51,6 +79,13 @@ public class ProjectDatabaseController {
         return listOfRandomProjects;
     }
     
+    /**
+     * Function searches leader tuple in the databese by its id.
+     * Then properly filled Project object is added to the database.
+     * 
+     * @param newProject Filled object representing project to be added.
+     * @param leaderId   Project leader ID. 
+     */
     public void createNewProjectInDatabase(Project newProject, int leaderId){
         User leader = userFacade.find(leaderId);
         newProject.setLeaderid(leader);
@@ -58,18 +93,42 @@ public class ProjectDatabaseController {
         logger.info("New project should be registrated in the database");
     }
     
+    /**
+     * Retrieve Project object from the database by its ID.
+     * 
+     * @param Id    Id of the Project tuple to be found.
+     * @return      Founded Project object.
+     */
     public Project getProjectByID(int Id){
         return projectFacade.find(Id);
     }
     
+    /**
+     * Retrieve Module object from the database by its ID.
+     * 
+     * @param Id    Id of the Module tuple to be found.
+     * @return      Founded Module object.
+     */
     public Module getModuleByID(int Id) {
         return moduleFacade.find(Id);
     }
     
+    /**
+     * Rertrieve Technology object from the database by its ID.
+     * 
+     * @param Id    Id of the Technology tuple to be found.
+     * @return      Founded Technology object.
+     */
     public Technology getTechnologyid(int Id) {
         return technologyFacade.find(Id);
     }
     
+    /**
+     * Retrieve User object from the databae by its ID.
+     * 
+     * @param id    If if the User tuple to be found.
+     * @return      Founded User object.
+     */
     public User getUserById(int id){
         return userFacade.find(id);
     }
