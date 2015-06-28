@@ -225,7 +225,7 @@ public class CreateProject implements Serializable {
         newProject.setRreadmelink(this.readmeLink);
         newProject.setContactandlinks(this.contactsAndLinks);
         newProject.setPicturelink(this.pictureLink);
-        newProject.setRecruting(Boolean.TRUE);
+        newProject.setRecruting(Boolean.FALSE);
         
         int leaderId = getUserIdFromSession();
         

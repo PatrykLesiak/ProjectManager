@@ -1,10 +1,11 @@
+DROP VIEW v_user_role;
+DROP VIEW v_Modules_to_Project;
 DROP TABLE Users_to_Technologies;
 DROP TABLE Users_to_Modules;
 DROP TABLE Technologies_to_Modules;
 DROP TABLE Technologies;
 DROP TABLE Modules;
 DROP TABLE Projects;
-DROP VIEW v_user_role;
 DROP TABLE USERS_GROUPS;
 DROP TABLE Users;
 DROP TABLE Groups;
@@ -98,6 +99,10 @@ SELECT  u.Email, u.Password, g.group_name
  INNER JOIN Users u ON u.UserID = ug.user_id
  INNER JOIN Groups g ON g.group_id =  ug.group_id; 
 
+CREATE VIEW v_Modules_to_Project AS
+ SELECT project.ProjectID, project.Title AS ProjectTitle, module.ModuleID, module.Title AS ModuleTitle 
+ FROM Projects project, Modules module 
+ WHERE project.PROJECTID = module.ProjectID; 
 
 INSERT INTO Users (LastName, FirstName, Email, Password, Readmelink, AvatarLink) VALUES 
 ('Majewski', 'Maciej', 'majewski.maciej@maciej.pl',
@@ -177,3 +182,4 @@ INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(2,3);
 INSERT INTO Groups(group_id,group_name) VALUES (1,'loggedUser');
 INSERT INTO USERS_GROUPS VALUES (1, 1),
 								(2, 1);
+								

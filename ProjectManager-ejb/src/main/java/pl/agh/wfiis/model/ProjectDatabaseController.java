@@ -1,6 +1,8 @@
 package pl.agh.wfiis.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -131,5 +133,22 @@ public class ProjectDatabaseController {
      */
     public User getUserById(int id){
         return userFacade.find(id);
+    }
+    
+    public List<Project> getLeadersProjects(int ID) {
+        List<Project> projects = projectFacade.findAll();
+        
+        for (Iterator<Project> iterator = projects.listIterator(); iterator.hasNext(); ) {
+            Project project = iterator.next();
+            if (project.getLeaderid().getUserid() != ID) {
+                iterator.remove();
+            }
+        }
+        
+        return projects;
+    }
+    
+    public void modifyProject(Project project) {
+        projectFacade.edit(project);
     }
 }

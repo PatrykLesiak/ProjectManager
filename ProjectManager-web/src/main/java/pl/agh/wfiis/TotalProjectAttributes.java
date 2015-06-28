@@ -110,4 +110,8 @@ public class TotalProjectAttributes implements Serializable {
         int number = 3;
         return projectDatabaseControler.getRandomProjects(number);
     }
+    
+    public List<Project> getLeadersProjects(int ID) {
+        return projectDatabaseControler.getLeadersProjects(ID);
+    }
 }

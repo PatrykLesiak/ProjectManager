@@ -5,6 +5,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pl.agh.wfiis.database.UsersToTechnologies;
 
+/**
+ *
+ * @author Patryk
+ */
 @Stateless
 public class UsersToTechnologiesFacade extends AbstractFacade<UsersToTechnologies> {
     @PersistenceContext(unitName = "pl.agh.wfiis_ProjectManager-ejb_ejb_devPU")
