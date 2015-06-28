@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content"> 
+            <div class="container-fluid">
+                <br></br>
+                <div class="row span7 text-center"> 
+
+                </div>
+                <br></br>
+                </div>
+            <div class="container ">
+                <c:set value="#{totalTechnologyAttributes.getTechnologyById(param['id'])}" var="technology" />
+                <div class="row">
+                    <div class="col-md-4">
+                     <h4>People:</h4>
+                                <ui:repeat value="#{technology.getUsersToTechnologiesCollection()}" var="czlek">
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{czlek.getUserid().getUserid()}">
+                                    <img src="#{czlek.getUserid().getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getUserid().getFirstname()}"></img>
+                                    </h:outputLink>
+                                 </ui:repeat>
+                    </div>
+                      
+                    <div class="col-md-8">
+                        <ui:repeat value="#{totalTechnologyAttributes.getProjectTechnologyListById(technology.getTechnologyid())}" var="randomProject">
+          <div class="row">
+                            <tr><td>
+        <div class="col-md-3 text-center">
+            <h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{randomProject.getProjectid()}">
+                <img src="#{randomProject.getPicturelink()}" class="img-circle" width="100" height="100"></img>
+            </h:outputLink>
+           
+        </div>
+                  
+        <div class="col-md-6">
+            <h2><h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{randomProject.getProjectid()}">
+                #{randomProject.getTitle()}
+            </h:outputLink><h:panelGroup class="label label-success" rendered="#{randomProject.getRecruting()}">Recruting</h:panelGroup></h2>
+            <p>#{randomProject.getDescription()}</p>
+            <!--<ui:repeat value="#randomProject.technologies" var="technology" rendered="#not empty randomProject.technologies">
+                <h:panelGroup class="label label-primary"> technology.name </h:panelGroup>
+            </ui:repeat>-->
+    </div></td>
+  </tr>
+          </div>
+</ui:repeat>
+                     
+                        
+                </div>
+                <br></br>
+                
+            </div>
+            </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+
+</html>

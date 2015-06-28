@@ -1,6 +1,7 @@
 package pl.agh.wfiis.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -9,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
+import pl.agh.wfiis.database.TechnologiesToModules;
 import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.facades.ProjectFacade;
 import pl.agh.wfiis.facades.UserFacade;
@@ -119,7 +121,7 @@ public class ProjectDatabaseController {
      * @param Id    Id of the Technology tuple to be found.
      * @return      Founded Technology object.
      */
-    public Technology getTechnologyid(int Id) {
+    public Technology getTechnologyById(int Id) {
         return technologyFacade.find(Id);
     }
     
@@ -131,5 +133,15 @@ public class ProjectDatabaseController {
      */
     public User getUserById(int id){
         return userFacade.find(id);
+    }
+    
+    public List<Project> getProjectListByTechnologyId(int id){
+        Technology t = technologyFacade.find(id);
+        HashSet<Project> projectDictionary = new HashSet<>();
+        for(TechnologiesToModules ttm :t.getTechnologiesToModulesCollection()){
+            projectDictionary.add(ttm.getModuleid().getProjectid());
+        }
+        List<Project> list = new ArrayList<>(projectDictionary);
+        return list;
     }
 }
