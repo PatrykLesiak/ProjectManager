@@ -38,7 +38,9 @@
                         <div class="row">
                             <h3>Tag cloud:</h3>
                             <ui:repeat value="#{czlek.getUsersToTechnologiesCollection()}" var="technology">
+                                 <h:outputLink value="/ProjectManager-web/faces/userProtected/technology.xhtml?id=#{technology.getTechnologyid().getTechnologyid()}">
                                 <span class="label label-default">#{technology.getTechnologyid().getName()}</span>
+                                 </h:outputLink>
                             </ui:repeat>
 
                         </div>

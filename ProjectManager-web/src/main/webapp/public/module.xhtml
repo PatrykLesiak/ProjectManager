@@ -34,8 +34,10 @@
                     <div class="col-md-4">
                         <div class="row">
                             <h3>Tag cloud:</h3>
-                            <ui:repeat value="#{totalModelAttributes.getTotalTechnology(model.getModelid())}" var="technology">
-                                <span class="label label-default">#{technology.getName()}</span>
+                            <ui:repeat value="#{module.getTechnologiesToModulesCollection()}" var="technology">
+                             <h:outputLink value="/ProjectManager-web/faces/userProtected/technology.xhtml?id=#{technology.getTechnologyid().getTechnologyid()}">    
+                                <span class="label label-default">#{technology.getTechnologyid().getName()}</span>
+                             </h:outputLink>
                             </ui:repeat>
 
                         </div>
