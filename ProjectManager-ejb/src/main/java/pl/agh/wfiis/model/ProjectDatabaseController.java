@@ -1,8 +1,12 @@
 package pl.agh.wfiis.model;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.Collection;
 import java.util.Iterator;
+=======
+import java.util.HashSet;
+>>>>>>> 7c8c9c9055b30edbc8a0c949c8284c133b951f15
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -11,10 +15,12 @@ import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
+import pl.agh.wfiis.database.TechnologiesToModules;
 import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.facades.ProjectFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.database.User;
+import pl.agh.wfiis.database.UsersToModules;
 import pl.agh.wfiis.facades.ModuleFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
 
@@ -121,7 +127,7 @@ public class ProjectDatabaseController {
      * @param Id    Id of the Technology tuple to be found.
      * @return      Founded Technology object.
      */
-    public Technology getTechnologyid(int Id) {
+    public Technology getTechnologyById(int Id) {
         return technologyFacade.find(Id);
     }
     
@@ -135,6 +141,7 @@ public class ProjectDatabaseController {
         return userFacade.find(id);
     }
     
+<<<<<<< HEAD
     public List<Project> getLeadersProjects(int ID) {
         List<Project> projects = projectFacade.findAll();
         
@@ -150,5 +157,26 @@ public class ProjectDatabaseController {
     
     public void modifyProject(Project project) {
         projectFacade.edit(project);
+=======
+    public List<Project> getProjectListByTechnologyId(int id){
+        Technology t = technologyFacade.find(id);
+        HashSet<Project> projectDictionary = new HashSet<>();
+        for(TechnologiesToModules ttm :t.getTechnologiesToModulesCollection()){
+            projectDictionary.add(ttm.getModuleid().getProjectid());
+        }
+        List<Project> list = new ArrayList<>(projectDictionary);
+        return list;
+    }
+    
+    public List<Project> getProjectListByUserId(int id){
+        User u = userFacade.find(id);
+        
+        HashSet<Project> projectDictionary = new HashSet<>();
+        for(UsersToModules ttm : u.getUsersToModulesCollection()){
+            projectDictionary.add(ttm.getModuleid().getProjectid());
+        }
+        List<Project> list = new ArrayList<>(projectDictionary);
+        return list;
+>>>>>>> 7c8c9c9055b30edbc8a0c949c8284c133b951f15
     }
 }

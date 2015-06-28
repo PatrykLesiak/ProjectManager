@@ -29,7 +29,9 @@
                         <div class="row">
                             <h3>Tag cloud:</h3>
                             <ui:repeat value="#{totalProjectAttributes.getTotalTechnology(projekt.projectid)}" var="technology">
+                               <h:outputLink value="/ProjectManager-web/faces/userProtected/technology.xhtml?id=#{technology.getTechnologyid()}">
                                 <span class="label label-default">#{technology.getName()}</span>
+                                </h:outputLink>
                             </ui:repeat>
 
                         </div>
