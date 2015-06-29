@@ -28,15 +28,21 @@ public class UserRegister implements Serializable {
     
     /**
      * Field for handling email data from the form.
-     * Write only.
      */
     private String email = "";
+
+    public String getEmail() {
+        return email;
+    }
     
     /**
      * Field for handling password data from the form.
-     * Write only.
      */
     private String password = "";
+
+    public String getPassword() {
+        return password;
+    }
 
     /**
      * Function used for handling data from the form.

@@ -88,9 +88,9 @@ group_name varchar(20) NOT NULL
 
 CREATE TABLE USERS_GROUPS
 (
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
 user_id int NOT NULL,
 group_id int NOT NULL, 
-PRIMARY KEY (user_id,group_id),
 FOREIGN KEY (group_id) REFERENCES Groups (group_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 FOREIGN KEY (user_id) REFERENCES Users (UserID) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
@@ -194,6 +194,6 @@ INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(2,6);
 INSERT INTO Users_to_Modules(UserID, ModuleID) VALUES(2,3);
 
 INSERT INTO Groups(group_id,group_name) VALUES (1,'loggedUser');
-INSERT INTO USERS_GROUPS VALUES (1, 1),
-								(2, 1);
+INSERT INTO USERS_GROUPS(user_id, group_id) VALUES (1, 1),
+												   (2, 1);
 								

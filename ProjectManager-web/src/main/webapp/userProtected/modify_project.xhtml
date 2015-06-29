@@ -6,7 +6,8 @@
       xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <body>
         
@@ -42,6 +43,32 @@
                             <h:commandButton styleClass="btn btn-default" action="#{modifyProject.modifyProject()}" value="Submit" />
                         </h:form> 
                 
+                        <div class="row">
+                        <h1 class="text-center"> Modules: </h1>
+                        <br></br>
+                        </div>
+                        <div class="row">
+                        <ui:repeat value="#{totalProjectAttributes.getTotalModules(modifyProject.projectID)}" var="module">                
+                            <div class="col-md-4">
+                                <div class="card #{totalProjectAttributes.boolToClassText(module.getRecruting())}">
+                               <h:outputLink value="/ProjectManager-web/faces/public/module.xhtml?id=#{module.getModuleid()}" class="cardlink">
+                                <h2 class="text-center">#{module.getTitle()}</h2>
+                               </h:outputLink>
+                                <p>#{module.getDescription()}</p>
+
+                                    <c:set value="#{module.getModuleid()}" var="mid" />
+                                    <ui:repeat value="#{totalModuleAttributes.getTechnologyList(mid)}" var="technologyUsers">
+                                    <span class="label label-default">#{technologyUsers.getName()}</span>
+                                    </ui:repeat>
+                                <center>
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/modify_module.xhtml?id=#{mid}">
+                                        <h:panelGroup class="label label-warning">Modify</h:panelGroup>
+                                    </h:outputLink>
+                                </center>
+                                </div>                            
+                            </div>
+                        </ui:repeat>
+                        </div>
             </ui:define>
         </ui:composition>
     </body>
