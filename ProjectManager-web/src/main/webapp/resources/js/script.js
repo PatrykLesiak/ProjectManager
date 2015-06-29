@@ -4,12 +4,7 @@
  * and open the template in the editor.
  */
 
-$(document).ready(
-        function(){
-            if ($("#main_info").length && $("#main_info").text() !== ""){
-                var link = $("#main_info").text();
-                var request_text = $.get(link,function(data){$("#main_info").text(data);});
-                
-            }
-        }
-        );
+function changeOnApply(){
+    $("#applyButton").value="Applied!";
+    $("#applyButton").addClass('btn-warning').removeClass('btn-success');
+};

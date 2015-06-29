@@ -22,8 +22,7 @@
                     
                     <img src="#{module.getProjectid().getPicturelink()}" height="300" width="300" class="img-circle"></img>
                     </h:outputLink>
-                    <h2><h:button rendered="#{module.getRecruting()}" class="btn btn-success btn-large" value="Apply">
-                        </h:button></h2>
+                    <h2><h:commandButton rendered="#{module.getRecruting() and not totalUserAttributes.isInModule(totalUserAttributes.loggedUserId, module.getModuleid())}" class="btn btn-success btn-large" value="Apply" id="applyButton" onclick="changeOnApply();"></h:commandButton></h2>
                 </div>
                 <br></br>
                 </div>

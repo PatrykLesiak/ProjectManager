@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.model.ProjectDatabaseController;
@@ -71,4 +72,15 @@ public class TotalUserAttributes implements Serializable {
             return 0;
         }
     }
+    
+    public boolean isInModule(int userid, int moduleid){
+        User u = projectDatabaseControler.getUserById(userid);
+        Module m = projectDatabaseControler.getModuleByID(moduleid);
+        return projectDatabaseControler.isUserInModule(u,m);   
+    }
+    public void applyToModule(int userid, int moduleid){
+        //projectDatabaseControler.
+    }
+    
+    
 }

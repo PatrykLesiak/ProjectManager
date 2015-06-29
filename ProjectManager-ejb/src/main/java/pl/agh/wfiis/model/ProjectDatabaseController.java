@@ -175,4 +175,18 @@ public class ProjectDatabaseController {
         return list;
 
     }
+    
+    public boolean isUserInModule(User u, Module m){
+        if (u.getUsersToModulesCollection() == null){
+            return false;
+        }
+        for(UsersToModules utm : u.getUsersToModulesCollection()){
+            if (utm.getModuleid().equals(m)) return true;
+        }
+        return false;
+    }
+    
+    public void userApplyToModule(User u, Module m){
+        m.
+    }
 }
