@@ -154,6 +154,10 @@ public class ProjectDatabaseController {
         projectFacade.edit(project);
     }
     
+    public void modifyModule(Module module) {
+        moduleFacade.edit(module);
+    }
+    
     public List<Project> getProjectListByTechnologyId(int id){
         Technology t = technologyFacade.find(id);
         HashSet<Project> projectDictionary = new HashSet<>();
