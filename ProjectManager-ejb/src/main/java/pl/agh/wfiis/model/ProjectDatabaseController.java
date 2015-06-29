@@ -1,12 +1,8 @@
 package pl.agh.wfiis.model;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.Collection;
-import java.util.Iterator;
-=======
 import java.util.HashSet;
->>>>>>> 7c8c9c9055b30edbc8a0c949c8284c133b951f15
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -141,7 +137,6 @@ public class ProjectDatabaseController {
         return userFacade.find(id);
     }
     
-<<<<<<< HEAD
     public List<Project> getLeadersProjects(int ID) {
         List<Project> projects = projectFacade.findAll();
         
@@ -157,7 +152,8 @@ public class ProjectDatabaseController {
     
     public void modifyProject(Project project) {
         projectFacade.edit(project);
-=======
+    }
+    
     public List<Project> getProjectListByTechnologyId(int id){
         Technology t = technologyFacade.find(id);
         HashSet<Project> projectDictionary = new HashSet<>();
@@ -177,6 +173,6 @@ public class ProjectDatabaseController {
         }
         List<Project> list = new ArrayList<>(projectDictionary);
         return list;
->>>>>>> 7c8c9c9055b30edbc8a0c949c8284c133b951f15
+
     }
 }

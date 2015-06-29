@@ -1,5 +1,7 @@
 DROP VIEW v_user_role;
 DROP VIEW v_Modules_to_Project;
+DROP TABLE InvitesToProjects;
+DROP TABLE AsksForCollaboration;
 DROP TABLE Users_to_Technologies;
 DROP TABLE Users_to_Modules;
 DROP TABLE Technologies_to_Modules;
@@ -91,6 +93,18 @@ group_id int NOT NULL,
 PRIMARY KEY (user_id,group_id),
 FOREIGN KEY (group_id) REFERENCES Groups (group_id) ON DELETE NO ACTION ON UPDATE NO ACTION,
 FOREIGN KEY (user_id) REFERENCES Users (UserID) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+CREATE TABLE InvitesToProjects(
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+UserID int NOT NULL,
+ModuleID int NOT NULL
+);
+
+CREATE TABLE AsksForCollaboration(
+Id int PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+UserID int NOT NULL,
+ModuleID int NOT NULL
 );
 
 CREATE VIEW v_user_role AS
