@@ -7,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,8 +28,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Groups.findByGroupId", query = "SELECT g FROM Groups g WHERE g.groupId = :groupId"),
     @NamedQuery(name = "Groups.findByGroupName", query = "SELECT g FROM Groups g WHERE g.groupName = :groupName")})
 public class Groups implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
-    private Collection<UsersGroups> usersGroupsCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -44,11 +39,8 @@ public class Groups implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "GROUP_NAME")
     private String groupName;
-    @JoinTable(name = "USERS_GROUPS", joinColumns = {
-        @JoinColumn(name = "GROUP_ID", referencedColumnName = "GROUP_ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "USER_ID", referencedColumnName = "USERID")})
-    @ManyToMany
-    private Collection<User> userCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "groupId")
+    private Collection<UsersGroups> usersGroupsCollection;
 
     public Groups() {
     }
@@ -79,12 +71,12 @@ public class Groups implements Serializable {
     }
 
     @XmlTransient
-    public Collection<User> getUserCollection() {
-        return userCollection;
+    public Collection<UsersGroups> getUsersGroupsCollection() {
+        return usersGroupsCollection;
     }
 
-    public void setUserCollection(Collection<User> userCollection) {
-        this.userCollection = userCollection;
+    public void setUsersGroupsCollection(Collection<UsersGroups> usersGroupsCollection) {
+        this.usersGroupsCollection = usersGroupsCollection;
     }
 
     @Override
@@ -110,15 +102,6 @@ public class Groups implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.Groups[ groupId=" + groupId + " ]";
-    }
-
-    @XmlTransient
-    public Collection<UsersGroups> getUsersGroupsCollection() {
-        return usersGroupsCollection;
-    }
-
-    public void setUsersGroupsCollection(Collection<UsersGroups> usersGroupsCollection) {
-        this.usersGroupsCollection = usersGroupsCollection;
     }
     
 }

@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,9 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Invitestoprojects.findAll", query = "SELECT i FROM Invitestoprojects i"),
-    @NamedQuery(name = "Invitestoprojects.findById", query = "SELECT i FROM Invitestoprojects i WHERE i.id = :id"),
-    @NamedQuery(name = "Invitestoprojects.findByUserid", query = "SELECT i FROM Invitestoprojects i WHERE i.userid = :userid"),
-    @NamedQuery(name = "Invitestoprojects.findByModuleid", query = "SELECT i FROM Invitestoprojects i WHERE i.moduleid = :moduleid")})
+    @NamedQuery(name = "Invitestoprojects.findById", query = "SELECT i FROM Invitestoprojects i WHERE i.id = :id")})
 public class Invitestoprojects implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,26 +31,18 @@ public class Invitestoprojects implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "USERID")
-    private int userid;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MODULEID")
-    private int moduleid;
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    @ManyToOne(optional = false)
+    private User userid;
+    @JoinColumn(name = "MODULEID", referencedColumnName = "MODULEID")
+    @ManyToOne(optional = false)
+    private Module moduleid;
 
     public Invitestoprojects() {
     }
 
     public Invitestoprojects(Integer id) {
         this.id = id;
-    }
-
-    public Invitestoprojects(Integer id, int userid, int moduleid) {
-        this.id = id;
-        this.userid = userid;
-        this.moduleid = moduleid;
     }
 
     public Integer getId() {
@@ -62,19 +53,19 @@ public class Invitestoprojects implements Serializable {
         this.id = id;
     }
 
-    public int getUserid() {
+    public User getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(User userid) {
         this.userid = userid;
     }
 
-    public int getModuleid() {
+    public Module getModuleid() {
         return moduleid;
     }
 
-    public void setModuleid(int moduleid) {
+    public void setModuleid(Module moduleid) {
         this.moduleid = moduleid;
     }
 

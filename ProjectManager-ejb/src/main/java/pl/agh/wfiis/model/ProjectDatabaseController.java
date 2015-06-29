@@ -191,6 +191,6 @@ public class ProjectDatabaseController {
     }
     
     public void userApplyToModule(User u, Module m){
-        m.
+        
     }
 }

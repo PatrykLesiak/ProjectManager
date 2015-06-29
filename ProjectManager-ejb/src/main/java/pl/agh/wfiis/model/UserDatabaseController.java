@@ -9,9 +9,13 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
+import pl.agh.wfiis.database.Groups;
 import pl.agh.wfiis.database.User;
+import pl.agh.wfiis.database.UsersGroups;
+import pl.agh.wfiis.facades.GroupsFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.facades.ProjectFacade;
+import pl.agh.wfiis.facades.UsersGroupsFacade;
 
 /**
  * Statefull bean responsible for all kind of operations on the database connected with users of the application.
@@ -33,9 +37,62 @@ public class UserDatabaseController {
     private ProjectFacade projectFacade;
     
     /**
+     * Facade to database for Groups class.
+     */
+    @EJB
+    private GroupsFacade groupsFacade;
+    
+    /**
+     * Facade to database for UsersGroups class.
+     */
+    @EJB
+    private UsersGroupsFacade usersGroupsFacade ;
+    
+    /**
      * Logger object for log operations which facilitates development process.
      */
     Logger logger = Logger.getLogger(getClass().getName());
+    
+    /**
+     * Assign user with given email to loggedUser group.
+     * 
+     * @param email User email
+     */
+    private void assignUserToLoggedUserGroup(String email) {
+        List<Groups> groups = groupsFacade.findAll();
+        List<User> users = userFacade.findAll();
+        Groups foundedLoggedUserGroupId = null;
+        User foundedUser = null;
+        
+        for (Groups group: groups) {
+            if (group.getGroupName().equals("loggedUser")) {
+                foundedLoggedUserGroupId = group;
+                break;
+            }
+        }
+        
+        if (foundedLoggedUserGroupId == null) {
+            logger.severe("Error: There is no group named loggedUser.");
+            return;
+        }
+        
+        for (User user: users) {
+            if (user.getEmail().equals(email)) {
+                foundedUser = user;
+                break;
+            }
+        }
+        
+        if (foundedUser == null) {
+            logger.severe("Error: There is no user with " + email + "email address.");
+            return;
+        }
+        
+        UsersGroups usersGroupsEntity = new UsersGroups();
+        usersGroupsEntity.setGroupId(foundedLoggedUserGroupId);
+        usersGroupsEntity.setUserId(foundedUser);
+        usersGroupsFacade.create(usersGroupsEntity);
+    }
     
     /**
      * Function responsible for writing user data into Users table in the database.
@@ -51,6 +108,7 @@ public class UserDatabaseController {
             for (byte byt : bytesPassword) result.append(Integer.toString((byt & 0xff) + 0x100, 16).substring(1));
             user.setPassword(result.toString());
             userFacade.create(user);
+            assignUserToLoggedUserGroup(user.getEmail());
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException exception) {
             Logger.getLogger(UserDatabaseController.class.getName()).log(Level.SEVERE, null, exception);
         }

@@ -9,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,10 +35,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByAvatarlink", query = "SELECT u FROM User u WHERE u.avatarlink = :avatarlink"),
     @NamedQuery(name = "User.findByReadmelink", query = "SELECT u FROM User u WHERE u.readmelink = :readmelink")})
 public class User implements Serializable {
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private Collection<UsersGroups> usersGroupsCollection;
-    @ManyToMany(mappedBy = "userCollection")
-    private Collection<Groups> groupsCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -72,9 +67,15 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
     private Collection<UsersToTechnologies> usersToTechnologiesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<Invitestoprojects> invitestoprojectsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
+    private Collection<Asksforcollaboration> asksforcollaborationCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid")
     private Collection<UsersToModules> usersToModulesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "leaderid")
     private Collection<Project> projectCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private Collection<UsersGroups> usersGroupsCollection;
 
     public User() {
     }
@@ -155,6 +156,24 @@ public class User implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Invitestoprojects> getInvitestoprojectsCollection() {
+        return invitestoprojectsCollection;
+    }
+
+    public void setInvitestoprojectsCollection(Collection<Invitestoprojects> invitestoprojectsCollection) {
+        this.invitestoprojectsCollection = invitestoprojectsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Asksforcollaboration> getAsksforcollaborationCollection() {
+        return asksforcollaborationCollection;
+    }
+
+    public void setAsksforcollaborationCollection(Collection<Asksforcollaboration> asksforcollaborationCollection) {
+        this.asksforcollaborationCollection = asksforcollaborationCollection;
+    }
+
+    @XmlTransient
     public Collection<UsersToModules> getUsersToModulesCollection() {
         return usersToModulesCollection;
     }
@@ -170,6 +189,15 @@ public class User implements Serializable {
 
     public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
+    }
+
+    @XmlTransient
+    public Collection<UsersGroups> getUsersGroupsCollection() {
+        return usersGroupsCollection;
+    }
+
+    public void setUsersGroupsCollection(Collection<UsersGroups> usersGroupsCollection) {
+        this.usersGroupsCollection = usersGroupsCollection;
     }
 
     @Override
@@ -195,24 +223,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "pl.agh.wfiis.database.User[ userid=" + userid + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Groups> getGroupsCollection() {
-        return groupsCollection;
-    }
-
-    public void setGroupsCollection(Collection<Groups> groupsCollection) {
-        this.groupsCollection = groupsCollection;
-    }
-
-    @XmlTransient
-    public Collection<UsersGroups> getUsersGroupsCollection() {
-        return usersGroupsCollection;
-    }
-
-    public void setUsersGroupsCollection(Collection<UsersGroups> usersGroupsCollection) {
-        this.usersGroupsCollection = usersGroupsCollection;
     }
     
 }

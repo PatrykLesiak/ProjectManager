@@ -19,6 +19,10 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+/**
+ *
+ * @author Patryk
+ */
 @Entity
 @Table(name = "MODULES")
 @XmlRootElement
@@ -50,6 +54,10 @@ public class Module implements Serializable {
     @JoinColumn(name = "PROJECTID", referencedColumnName = "PROJECTID")
     @ManyToOne(optional = false)
     private Project projectid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<Invitestoprojects> invitestoprojectsCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
+    private Collection<Asksforcollaboration> asksforcollaborationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
     private Collection<UsersToModules> usersToModulesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "moduleid")
@@ -108,6 +116,24 @@ public class Module implements Serializable {
 
     public void setProjectid(Project projectid) {
         this.projectid = projectid;
+    }
+
+    @XmlTransient
+    public Collection<Invitestoprojects> getInvitestoprojectsCollection() {
+        return invitestoprojectsCollection;
+    }
+
+    public void setInvitestoprojectsCollection(Collection<Invitestoprojects> invitestoprojectsCollection) {
+        this.invitestoprojectsCollection = invitestoprojectsCollection;
+    }
+
+    @XmlTransient
+    public Collection<Asksforcollaboration> getAsksforcollaborationCollection() {
+        return asksforcollaborationCollection;
+    }
+
+    public void setAsksforcollaborationCollection(Collection<Asksforcollaboration> asksforcollaborationCollection) {
+        this.asksforcollaborationCollection = asksforcollaborationCollection;
     }
 
     @XmlTransient

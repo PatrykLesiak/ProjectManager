@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -22,9 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Asksforcollaboration.findAll", query = "SELECT a FROM Asksforcollaboration a"),
-    @NamedQuery(name = "Asksforcollaboration.findById", query = "SELECT a FROM Asksforcollaboration a WHERE a.id = :id"),
-    @NamedQuery(name = "Asksforcollaboration.findByUserid", query = "SELECT a FROM Asksforcollaboration a WHERE a.userid = :userid"),
-    @NamedQuery(name = "Asksforcollaboration.findByModuleid", query = "SELECT a FROM Asksforcollaboration a WHERE a.moduleid = :moduleid")})
+    @NamedQuery(name = "Asksforcollaboration.findById", query = "SELECT a FROM Asksforcollaboration a WHERE a.id = :id")})
 public class Asksforcollaboration implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,26 +31,18 @@ public class Asksforcollaboration implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "USERID")
-    private int userid;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "MODULEID")
-    private int moduleid;
+    @JoinColumn(name = "USERID", referencedColumnName = "USERID")
+    @ManyToOne(optional = false)
+    private User userid;
+    @JoinColumn(name = "MODULEID", referencedColumnName = "MODULEID")
+    @ManyToOne(optional = false)
+    private Module moduleid;
 
     public Asksforcollaboration() {
     }
 
     public Asksforcollaboration(Integer id) {
         this.id = id;
-    }
-
-    public Asksforcollaboration(Integer id, int userid, int moduleid) {
-        this.id = id;
-        this.userid = userid;
-        this.moduleid = moduleid;
     }
 
     public Integer getId() {
@@ -62,19 +53,19 @@ public class Asksforcollaboration implements Serializable {
         this.id = id;
     }
 
-    public int getUserid() {
+    public User getUserid() {
         return userid;
     }
 
-    public void setUserid(int userid) {
+    public void setUserid(User userid) {
         this.userid = userid;
     }
 
-    public int getModuleid() {
+    public Module getModuleid() {
         return moduleid;
     }
 
-    public void setModuleid(int moduleid) {
+    public void setModuleid(Module moduleid) {
         this.moduleid = moduleid;
     }
 
