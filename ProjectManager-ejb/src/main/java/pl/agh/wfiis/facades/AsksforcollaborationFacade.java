@@ -7,7 +7,7 @@ import pl.agh.wfiis.database.Asksforcollaboration;
 
 /**
  *
- * @author Patryk
+ * @author Patryk Lesiak
  */
 @Stateless
 public class AsksforcollaborationFacade extends AbstractFacade<Asksforcollaboration> {
