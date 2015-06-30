@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content">
+                <div class="row" style="padding-top:70px">
+                    <div class="col-md-12">
+                        <h1>Asks to join the projects</h1>
+                 <table class="table table-hover">
+                     <ui:repeat value="#{totalUserAttributes.getAllLideredModules(totalUserAttributes.loggedUserId)}" var="module">
+                         <ui:repeat value="#{module.getAsksforcollaborationCollection()}" var="ask">
+                     <tr><td>
+                        <h:outputLink value="/ProjectManager-web/faces/public/module.xhtml?id=#{ask.getModuleid().getModuleid()}">
+                                    <img src="#{ask.getModuleid().getProjectid().getPicturelink()}" class="img-rounded" height="50" width="50" title="#{ask.getModuleid().getTitle()}"></img>
+                                    </h:outputLink>
+                         Module #{ask.getModuleid().getTitle()} in Project #{ask.getModuleid().getProjectid().getTitle()}
+                         </td><td>
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{ask.getUserid().getUserid()}">
+                                    <img src="#{ask.getUserid().getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{ask.getUserid().getFirstname()}"></img>
+                                    </h:outputLink>
+                         </td><td>
+                             <h:outputLink value="/ProjectManager-web/faces/userProtected/acceptAskToModule.xhtml?askid=#{ask.getId()}">
+                        <h2><h:commandButton value="Accept" class="btn btn-success btn-large" ></h:commandButton></h2>
+                    </h:outputLink>
+                         </td></tr>
+                     </ui:repeat>
+                     </ui:repeat>
+                 </table>
+                    </div>
+                </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

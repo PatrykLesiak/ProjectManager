@@ -15,10 +15,15 @@
           </div>
            <br></br>
            <div class="row">
-           <table class="table table-hover">
-               <h:outputLink value="/ProjectManager-web/faces/userProtected/invitesToProjects.xhtml" type="button" class="btn-large btn-primary">
-                    Invitations
+               <div class="col-md-12">
+               <h:outputLink value="/ProjectManager-web/faces/userProtected/invitesToProjects.xhtml" class="btn-large btn-primary">
+                   <button class="btn-large btn-primary">Invitations</button>
                </h:outputLink>
+               </div>
+          
+           <table class="table table-hover">
+               
+               
                <ui:repeat value="#{totalProjectAttributes.getRandomProjectList()}" var="randomProject">
           <tr><td>
         <div class="col-md-2 text-center">

@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import pl.agh.wfiis.database.Asksforcollaboration;
 import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.TechnologiesToModules;
@@ -88,5 +89,10 @@ public class TotalModuleAttributes implements Serializable {
         Invitestoprojects inv = projectDatabaseController.getInvitestoprojectById(invid);
         projectDatabaseController.addUserToModule(inv);
         projectDatabaseController.deleteInvitation(inv);
+    }
+    public void acceptAsk(int askid){
+        Asksforcollaboration ask = projectDatabaseController.getAsksforcollaborationById(askid);
+        projectDatabaseController.addUserToModule(ask);
+        projectDatabaseController.deleteAsk(ask);
     }
 }

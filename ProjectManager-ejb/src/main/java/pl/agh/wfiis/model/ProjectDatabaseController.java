@@ -269,4 +269,19 @@ public class ProjectDatabaseController {
     public void deleteInvitation(Invitestoprojects inv) {
        invitestoprojectsFacade.remove(inv);
     }
+
+    public void addUserToModule(Asksforcollaboration ask) {
+        UsersToModules utm = new UsersToModules();
+        utm.setModuleid(ask.getModuleid());
+        utm.setUserid(ask.getUserid());
+        usersToModulesFacade.create(utm);
+    }
+
+    public void deleteAsk(Asksforcollaboration ask) {
+        asksforcollaborationFacade.remove(ask);
+    }
+    
+    public Asksforcollaboration getAsksforcollaborationById(int id){
+        return asksforcollaborationFacade.find(id);
+    }
 }

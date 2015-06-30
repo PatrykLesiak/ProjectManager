@@ -23,7 +23,7 @@
                                     </h:outputLink>
                          Module #{invite.getModuleid().getTitle()} in Project #{invite.getModuleid().getProjectid().getTitle()}
                          </td><td>
-                             <h:outputLink value="/ProjectManager-web/faces/userProtected/acceptInvitationToModule.xhtml?moduleid=#{invite.getId()}">
+                             <h:outputLink value="/ProjectManager-web/faces/userProtected/acceptInvitationToModule.xhtml?inviteid=#{invite.getId()}">
                         <h2><h:commandButton value="Accept" class="btn btn-success btn-large" ></h:commandButton></h2>
                     </h:outputLink>
                          </td></tr>
