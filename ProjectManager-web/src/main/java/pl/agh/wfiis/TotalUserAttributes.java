@@ -74,6 +74,13 @@ public class TotalUserAttributes implements Serializable {
         }
     }
     
+    /**
+     * Check if user with given id belongs to specyfied module.
+     * 
+     * @param userid User ID.
+     * @param moduleid Module ID.
+     * @return Belonging user to module.
+     */
     public boolean isInModule(int userid, int moduleid){
         if(userid == 0) return false;
         User u = projectDatabaseControler.getUserById(userid);
@@ -81,6 +88,13 @@ public class TotalUserAttributes implements Serializable {
         boolean result = projectDatabaseControler.isUserInModule(u,m);
         return result;
     }
+    
+    /**
+     * 
+     * 
+     * @param userid
+     * @param moduleid 
+     */
     public String applyToModule(int userid, int moduleid){
         if(userid == 0) return "";
         User u = projectDatabaseControler.getUserById(userid);
