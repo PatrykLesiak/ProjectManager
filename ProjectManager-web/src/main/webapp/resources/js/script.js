@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 
-function changeOnApply(){
-    $("#applyButton").value="Applied!";
-    $("#applyButton").addClass('btn-warning').removeClass('btn-success');
+function changeOnApply(buton){
+    $(buton).value="Applied!";
+    $(buton).addClass('btn-warning').removeClass('btn-success');
+    $(buton).attr("disabled", true);
 };

@@ -18,11 +18,13 @@
                 <c:set var="module" value="#{totalModuleAttributes.getModuleById(param['id'])}" />
                 <div class="row span7 text-center"> 
                     <h:outputLink value="/ProjectManager-web/faces/public/project.xhtml?id=#{module.getProjectid().getProjectid()}">
-                    <h2>#{module.getProjectid().getTitle()}</h2>
-                    
+                    <h2>#{module.getProjectid().getTitle()}</h2 >
                     <img src="#{module.getProjectid().getPicturelink()}" height="300" width="300" class="img-circle"></img>
                     </h:outputLink>
-                    <h2><h:commandButton rendered="#{module.getRecruting() and not totalUserAttributes.isInModule(totalUserAttributes.loggedUserId, module.getModuleid())}" class="btn btn-success btn-large" value="Apply" id="applyButton" onclick="changeOnApply();"></h:commandButton></h2>
+                    <h:outputLink value="/ProjectManager-web/faces/userProtected/applyToProject.xhtml?moduleid=#{module.getModuleid()}">
+                        <h2><h:commandButton rendered="#{module.getRecruting() and not totalUserAttributes.isInModule(totalUserAttributes.loggedUserId,module.getModuleid()) and not totalUserAttributes.alreadyApplied(totalUserAttributes.loggedUserId, module.getModuleid())}" type="submit" value="Apply" class="btn btn-success btn-large" ></h:commandButton></h2>
+                    </h:outputLink>
+                    <h2><h:commandButton rendered="#{totalUserAttributes.alreadyApplied(totalUserAttributes.loggedUserId,module.getModuleid())}" class="btn btn-warning btn-large" value="Already applied." disabled="true"></h:commandButton></h2>
                 </div>
                 <br></br>
                 </div>
@@ -41,11 +43,14 @@
 
                         </div>
                         <div class="row">
-                      
+                      <h:form id="form2">
                                 <h4>People:</h4>
                                 <ui:repeat value="#{totalModuleAttributes.getUserList(module.getModuleid())}" var="czlek">
+                                    <h:outputLink value="/ProjectManager-web/faces/userProtected/user_page.xhtml?id=#{czlek.getUserid()}">
                                     <img src="#{czlek.getAvatarlink()}" class="img-rounded" height="50" width="50" title="#{czlek.getFirstname()}"></img>
+                                    </h:outputLink>
                                  </ui:repeat>       
+                      </h:form>
                         </div>
                     </div>
                       

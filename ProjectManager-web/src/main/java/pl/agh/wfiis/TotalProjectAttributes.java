@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.TechnologiesToModules;
@@ -114,4 +115,6 @@ public class TotalProjectAttributes implements Serializable {
     public List<Project> getLeadersProjects(int ID) {
         return projectDatabaseControler.getLeadersProjects(ID);
     }
+    
+    
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content">
+                <div class="row" style="padding-top:70px">
+                 #{totalModuleAttributes.acceptInvitation(params["inviteid"])}
+                 </div>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

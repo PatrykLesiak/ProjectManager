@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import pl.agh.wfiis.database.Asksforcollaboration;
+import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.TechnologiesToModules;
@@ -17,8 +19,12 @@ import pl.agh.wfiis.facades.ProjectFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.UsersToModules;
+import pl.agh.wfiis.facades.AsksforcollaborationFacade;
+import pl.agh.wfiis.facades.InvitestoprojectsFacade;
 import pl.agh.wfiis.facades.ModuleFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
+import pl.agh.wfiis.facades.UsersToModulesFacade;
+import pl.agh.wfiis.facades.UsersToTechnologiesFacade;
 
 /**
  * Stateless bean for all kind of operations on the database connected with registered projects.
@@ -55,6 +61,26 @@ public class ProjectDatabaseController {
      */
     @EJB
     private TechnologyFacade technologyFacade;
+    
+    
+    /**
+     * Facade to database for Asksforcollaboration class.
+     */
+    @EJB
+    private AsksforcollaborationFacade asksforcollaborationFacade;
+    
+    
+    /**
+     * Facade to database for Invitestoprojects class.
+     */
+    @EJB
+    private InvitestoprojectsFacade invitestoprojectsFacade;
+    
+    /**
+     * Facade to database for UsersToModules class.
+     */
+    @EJB
+    private UsersToModulesFacade usersToModulesFacade;
     
     /**
      * Retrieves registered projects from the database.
@@ -184,13 +210,63 @@ public class ProjectDatabaseController {
         if (u.getUsersToModulesCollection() == null){
             return false;
         }
-        for(UsersToModules utm : u.getUsersToModulesCollection()){
-            if (utm.getModuleid().equals(m)) return true;
+        for(UsersToModules utm : u.getUsersToModulesCollection())
+        {
+            if(utm.getModuleid().equals(m)) return true;
+         
         }
         return false;
     }
     
     public void userApplyToModule(User u, Module m){
-        
+        Asksforcollaboration asks = new Asksforcollaboration();
+        asks.setModuleid(m);
+        asks.setUserid(u);
+        asksforcollaborationFacade.create(asks);
+    }
+    
+    public boolean userAlreadyApplied(User u, Module m){
+        for(Asksforcollaboration askfc : u.getAsksforcollaborationCollection()){
+            if(askfc.getModuleid().equals(m)) return true;
+        }
+        return false;
+    }
+
+    public List<Module> getAllLideredProjects(User u) {
+        HashSet<Module> moduleDictionary = new HashSet<>();
+        for(Project p : u.getProjectCollection()){
+            moduleDictionary.addAll(p.getModuleCollection());
+        }
+        List<Module> list = new ArrayList<>(moduleDictionary);
+        return list;
+    }
+
+    public void inviteUserToModule(User u, Module m) {
+        Invitestoprojects inv = new Invitestoprojects();
+        inv.setUserid(u);
+        inv.setModuleid(m);
+        invitestoprojectsFacade.create(inv);
+    }
+
+    public boolean userAlreadyInvited(User u, Module m) {
+        for(Invitestoprojects inv : u.getInvitestoprojectsCollection()){
+            if (m.getModuleid().equals(inv.getModuleid().getModuleid())) return true;
+        }
+        return false;
+    }
+    
+    public Invitestoprojects getInvitestoprojectById(int id){
+        return invitestoprojectsFacade.find(id);
+    }
+
+    public void addUserToModule(Invitestoprojects inv) {
+        UsersToModules utm = new UsersToModules();
+        utm.setModuleid(inv.getModuleid());
+        utm.setUserid(inv.getUserid());
+        usersToModulesFacade.create(utm);
+    }
+
+    public void deleteInvitation(Invitestoprojects inv) {
+       invitestoprojectsFacade.remove(inv);
     }
 }
