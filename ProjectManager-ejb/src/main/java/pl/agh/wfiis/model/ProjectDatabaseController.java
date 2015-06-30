@@ -179,6 +179,10 @@ public class ProjectDatabaseController {
     public void modifyProject(Project project) {
         projectFacade.edit(project);
     }
+
+    public void createModule(Module module) {
+        moduleFacade.create(module);
+    }
     
     public void modifyModule(Module module) {
         moduleFacade.edit(module);

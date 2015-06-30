@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <body>
+        
+        <f:metadata>
+            <f:viewParam name="id" value="#{createModule.projectId}" />
+            <f:event type="preRenderView" listener="#{createModule.prepareBean()}"/>
+        </f:metadata>
+        
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content">
+                        <h:form>
+                            <div class="form-group">
+                                <label for="moduleTitle">Module Title</label>
+                                <h:inputText styleClass="form-control" id="moduleTitle" value="#{createModule.title}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="moduleDescription">Description</label>
+                                <h:inputTextarea styleClass="form-control" id="moduleDescription" value="#{createModule.description}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="moduleReadmeLink">Readme Link</label>
+                                <h:inputText styleClass="form-control" id="moduleReadmeLink" value="#{createModule.readmeLink}" />
+                            </div>
+                            <h:commandButton styleClass="btn btn-default" action="#{createModule.create()}" value="Submit" />
+                        </h:form> 
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

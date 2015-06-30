@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.agh.wfiis;
 
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.TechnologiesToModules;
@@ -27,7 +21,7 @@ import pl.agh.wfiis.model.ProjectDatabaseController;
  * @author hawker
  */
 @Named(value = "totalProjectAttributes")
-@SessionScoped
+@RequestScoped
 public class TotalProjectAttributes implements Serializable {
 
     @EJB
