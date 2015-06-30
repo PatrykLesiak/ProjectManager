@@ -27,11 +27,15 @@
                             <c:set var="czlek" value="#{totalUserAttributes.getUserById(param['id'])}" />
                         <h2>#{czlek.getFirstname()} #{czlek.getLastname()}</h2>
                         <img src="#{czlek.getAvatarlink()}" class="img-circle" width="150" height="150"></img>
-                        <h2>
+                        <c:set value="#{totalUserAttributes.loggedUserId}" var="liderid"/>
+                        <ui:repeat value="#{totalUserAttributes.getAllLideredModules(liderid)}" var="lideredModule" rendered="#{totalUserAttributes.userIsLeader(liderid)}">
+                           <h:outputLink value="/ProjectManager-web/faces/userProtected/inviteToProject.xhtml?moduleid=#{lideredModule.getModuleid()}&amp;userid=#{czlek.getUserid()}">
+                            <h2><h:commandButton rendered="#{lideredModule.getRecruting() and not totalUserAttributes.isInModule(czlek.getUserid(),lideredModule.getModuleid()) and not totalUserAttributes.alreadyInvitedToModule(czlek.getUserid(), lideredModule.getModuleid())}" class="btn btn-success btn-large" value="Invite to #{lideredModule.title}" >
+                                </h:commandButton> </h2>  </h:outputLink>
                         
-                        <button type="button" class="btn btn-success btn-large">
-                            Invite to project 1
-                        </button></h2>
+                            <h2><h:commandButton rendered="#{totalUserAttributes.alreadyInvitedToModule(czlek.getUserid(), lideredModule.getModuleid())}" class="btn btn-warning btn-large" value="Already invited to#{lideredModule.title}" disabled="true"></h:commandButton></h2>
+                            
+                        </ui:repeat>
                         </div>
                         <div class="row">
                             <h3>Tag cloud:</h3>

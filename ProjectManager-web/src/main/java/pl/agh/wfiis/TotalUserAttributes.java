@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.User;
@@ -74,13 +75,47 @@ public class TotalUserAttributes implements Serializable {
     }
     
     public boolean isInModule(int userid, int moduleid){
+        if(userid == 0) return false;
         User u = projectDatabaseControler.getUserById(userid);
         Module m = projectDatabaseControler.getModuleByID(moduleid);
-        return projectDatabaseControler.isUserInModule(u,m);   
+        boolean result = projectDatabaseControler.isUserInModule(u,m);
+        return result;
     }
-    public void applyToModule(int userid, int moduleid){
-        //projectDatabaseControler.
+    public String applyToModule(int userid, int moduleid){
+        if(userid == 0) return "";
+        User u = projectDatabaseControler.getUserById(userid);
+        Module m = projectDatabaseControler.getModuleByID(moduleid);
+        projectDatabaseControler.userApplyToModule(u, m);
+        return "";
     }
     
+    public boolean alreadyApplied(int userid, int moduleid){
+        if(userid == 0) return false;
+        User u = projectDatabaseControler.getUserById(userid);
+        Module m = projectDatabaseControler.getModuleByID(moduleid);
+        boolean result = projectDatabaseControler.userAlreadyApplied(u,m);
+        return result;
+    }
     
+    public List<Module> getAllLideredModules(int userid){
+        User u = projectDatabaseControler.getUserById(userid);
+        return projectDatabaseControler.getAllLideredProjects(u);
+        }
+    
+    public void inviteToModule(int userid, int moduleid){
+        User u = projectDatabaseControler.getUserById(userid);
+        Module m = projectDatabaseControler.getModuleByID(moduleid);
+        projectDatabaseControler.inviteUserToModule(u,m);
+    }
+    
+    public boolean alreadyInvitedToModule(int userid, int moduleid){
+        User u = projectDatabaseControler.getUserById(userid);
+        Module m = projectDatabaseControler.getModuleByID(moduleid);
+        return projectDatabaseControler.userAlreadyInvited(u,m);
+    }
+    
+    public boolean userIsLeader(int userid){
+        User u = projectDatabaseControler.getUserById(userid);
+        return !u.getProjectCollection().isEmpty();
+    }
 }

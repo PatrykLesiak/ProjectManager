@@ -16,6 +16,9 @@
            <br></br>
            <div class="row">
            <table class="table table-hover">
+               <h:outputLink value="/ProjectManager-web/faces/userProtected/invitesToProjects.xhtml" type="button" class="btn-large btn-primary">
+                    Invitations
+               </h:outputLink>
                <ui:repeat value="#{totalProjectAttributes.getRandomProjectList()}" var="randomProject">
           <tr><td>
         <div class="col-md-2 text-center">
