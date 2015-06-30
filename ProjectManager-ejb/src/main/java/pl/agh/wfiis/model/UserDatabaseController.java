@@ -132,4 +132,23 @@ public class UserDatabaseController {
         return null;
     }
     
+    /**
+     * Check if given user is in specyfied group.
+     * 
+     * @param email User email.
+     * @param groupName Group name.
+     * @return Belonging user to given group.
+     */
+    public Boolean isUserInGroup(String email, String groupName) {
+        List<UsersGroups> list = usersGroupsFacade.findAll();
+        for (UsersGroups tuple : list) {
+            User user = tuple.getUserId();
+            Groups group = tuple.getGroupId();
+            if(user.getEmail().equals(email) && group.getGroupName().equals(groupName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

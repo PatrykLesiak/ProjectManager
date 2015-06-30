@@ -5,35 +5,41 @@
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
         
     <body>
         <ui:composition>   
             <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <a class="navbar-brand" href="#">The Call of Project</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control"></input>
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control"></input>
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-            <h:link class="btn btn-warning" value="Sign up" outcome="/public/register" />
-          </form>
-        </div>
-      </div>
-    </nav>
+                <div class="container">
+                  <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                      <a class="navbar-brand" href="/">The Call of Project</a>
+                  </div>
+                  <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><h:link value="Register" outcome="/public/register" /></li>
+                    </ul>  
+                    <h:form id="mainPageLoginForm" prependId="false" styleClass="navbar-form navbar-right" 
+                                      style="max-width:500px;margin:0 auto;"
+                                      onsubmit="document.getElementById('mainPageLoginForm').action = 'j_security_check';">      
+                      <div class="form-group">
+                        <h:inputText p:placeholder="Login" styleClass="form-control" id="j_username" required="true"/>
+                      </div>
+                      <div class="form-group">
+                        <h:inputSecret p:placeholder="Password" styleClass="form-control" id="j_password" required="true"/>
+                      </div>
+                      <input type="submit" class="btn btn-success"  value="Sing in" name="Submit"/>   
+                    </h:form>  
+                    
+                  </div>
+                </div>
+            </nav>
         </ui:composition>
     </body>
  

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+    <h:body>
+        <ui:composition template="../templates/defaultLayout.xhtml"> 
+            <ui:define name="headMetaData">
+                <meta http-equiv="refresh" content="2;url=/ProjectManager-web/faces/index.xhtml" />
+            </ui:define>                  
+            <ui:define name="content">
+                <div class="jumbotron">
+                    <h1>See you soon!</h1>
+                    <h:outputText value="#{userSessionManager.logOut()}" /> 
+                </div>        
+            </ui:define>                        
+        </ui:composition>
+    </h:body>
+ 
+</html>

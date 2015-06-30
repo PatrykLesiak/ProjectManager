@@ -14,10 +14,19 @@
         <h:outputScript library="js" name="bootstrap.js"/>
         <h:outputScript library="js" name="script.js"/>
         <h:outputStylesheet library="css" name="style.css"/>
+        <ui:insert name="headMetaData" />
     </h:head>
  
     <h:body>
-        <ui:include src="navbarAnonymus.xhtml"/>
+        <h:panelGroup id="wrapperPanel">
+            <h:panelGroup id="loggedUserNavbar" rendered="#{(!userSessionManager.isUserLoggedin())}">
+                <ui:include src="navbarAnonymus.xhtml"/>
+            </h:panelGroup>
+            <h:panelGroup id="unloggedUserNavbar" rendered="#{userSessionManager.isUserLoggedin()}">
+                <ui:include src="navbarLoggedIn.xhtml"/>
+            </h:panelGroup>
+        </h:panelGroup>
+        
         <div class="container">
 		<ui:insert name="content"/>
                 <ui:include src="footer.xhtml"/>
