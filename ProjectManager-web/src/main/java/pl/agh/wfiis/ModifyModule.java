@@ -16,8 +16,8 @@ public class ModifyModule implements Serializable {
     /**
     * Logger object for log operations which facilitates development process.
     */
-    
     Logger logger = Logger.getLogger(getClass().getName());
+    
     /**
      * Variable for storing module ID.
      */

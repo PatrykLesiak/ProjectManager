@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+        
+        <f:metadata>
+            <f:event type="preRenderView" listener="#{userProfileManager.initBean()}"/>
+        </f:metadata>
+        
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content"> 
+            <br></br><br></br>
+                        <h:form>
+                            <div class="form-group">
+                                <label for="userFirstName">User first name</label>
+                                <h:inputText styleClass="form-control" id="userFirstName" value="#{userProfileManager.firstName}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="userLastName">User last name</label>
+                                <h:inputTextarea styleClass="form-control" id="userLastName" value="#{userProfileManager.lastName}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="userReadmeLink">User readme Link</label>
+                                <h:inputText styleClass="form-control" id="userReadmeLink" value="#{userProfileManager.readmeLink}" />
+                            </div>
+                            <div class="form-group">avatarLink
+                                <label for="userAvatarLink">Avatar link</label>
+                                <h:inputText styleClass="form-control" id="userAvatarLink" value="#{userProfileManager.avatarLink}" />
+                            </div>
+                            <h:commandButton styleClass="btn btn-primary" action="#{userProfileManager.modify()}" value="Submit" />
+                        </h:form> 
+            </ui:define>
+        </ui:composition>
+    </body>
+
+</html>

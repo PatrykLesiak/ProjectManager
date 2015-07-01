@@ -151,4 +151,26 @@ public class UserDatabaseController {
         return false;
     }
     
+    
+    /**
+     * Retrieves User object with given email.
+     * 
+     * @param email User email to be found.
+     * @return Founded User object or null if user does not exist.
+     */
+    public User getUserByEmail(String email) {
+        List<User> users = userFacade.findAll();
+        for(User user: users) {
+            if(user.getEmail().equals(email) ) {
+                return user;
+            }
+        }
+        return null;
+    }
+    
+    public void modifyUser(User user) {
+        userFacade.edit(user);
+        
+    }
+    
 }
