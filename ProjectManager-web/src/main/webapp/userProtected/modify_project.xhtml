@@ -19,6 +19,7 @@
         <ui:composition template="../templates/defaultLayout.xhtml">  
 
             <ui:define name="content">
+                <br></br><br></br>
                         <h:form>
                             <div class="form-group">
                                 <label for="projectTitle">Project Title</label>
@@ -40,9 +41,9 @@
                                 <label for="projectPictureLink">Picture Link</label>
                                 <h:inputText styleClass="form-control" id="projectPictureLink" value="#{modifyProject.pictureLink}" />
                             </div>
-                            <h:commandButton styleClass="btn btn-default" action="#{modifyProject.modifyProject()}" value="Submit" />
+                            <h:commandButton styleClass="btn btn-success" action="#{modifyProject.modifyProject()}" value="Submit" />
                         </h:form> 
-                
+                        <br></br>
                         <div class="row">
                         <h1 class="text-center"> Modules: </h1>
                         <br></br>
@@ -61,9 +62,16 @@
                                     <span class="label label-default">#{technologyUsers.getName()}</span>
                                     </ui:repeat>
                                 <center>
+                                    <br></br>
+                                    <h:form>
                                     <h:outputLink value="/ProjectManager-web/faces/userProtected/modify_module.xhtml?id=#{mid}">
-                                        <h:panelGroup class="label label-warning">Modify</h:panelGroup>
+                                        <h:panelGroup styleClass="btn btn-warning">Modify</h:panelGroup>
                                     </h:outputLink>
+                                    &nbsp;&nbsp;
+                                    <h:commandLink id="next" action="#{modifyModule.delete(module.getModuleid())}">
+                                        <h:panelGroup styleClass="btn btn-danger">Delete</h:panelGroup>
+                                    </h:commandLink>    
+                                    </h:form>
                                 </center>
                                 </div>                            
                             </div>

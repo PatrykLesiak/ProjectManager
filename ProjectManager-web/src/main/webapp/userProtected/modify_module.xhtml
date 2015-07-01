@@ -17,8 +17,8 @@
         </f:metadata>
         
         <ui:composition template="../templates/defaultLayout.xhtml">  
-
             <ui:define name="content">
+                <br></br><br></br>
                         <h:form>
                             <div class="form-group">
                                 <label for="moduleTitle">Module Title</label>
@@ -33,10 +33,13 @@
                                 <h:inputText styleClass="form-control" id="moduleReadmeLink" value="#{modifyModule.readmeLink}" />
                             </div>
                             <div class="form-group">
-                                <label for="moduleRecruting">Recruting</label>
-                                    <h:inputText styleClass="form-control" id="moduleRecruting" value="#{modifyModule.recruiting}" />
+                                <label for="moduleRecruting">Recruting&nbsp;&nbsp;</label>
+                                    <h:selectOneMenu id="shippingOption" required="true" value="#{modifyModule.recruiting}">
+                                        <f:selectItem itemValue="True" itemLabel="Enable"/>
+                                        <f:selectItem itemValue="False" itemLabel="Disable"/>                                   
+                                    </h:selectOneMenu>
                             </div>
-                            <h:commandButton styleClass="btn btn-default" action="#{modifyModule.modify()}" value="Submit" />
+                            <h:commandButton styleClass="btn btn-primary" action="#{modifyModule.modify()}" value="Submit" />
                         </h:form> 
             </ui:define>
         </ui:composition>

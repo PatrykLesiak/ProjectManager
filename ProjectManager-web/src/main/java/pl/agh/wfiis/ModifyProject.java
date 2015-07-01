@@ -139,7 +139,7 @@ public class ModifyProject implements Serializable {
         logger.info(project.getTitle());
     }
     
-    public void modifyProject() {
+    public String modifyProject() {
         project.setTitle(title);
         project.setDescription(description);
         project.setRreadmelink(readmeLink);
@@ -148,6 +148,8 @@ public class ModifyProject implements Serializable {
         project.setPicturelink(pictureLink);
 
         projectDatabaseControler.modifyProject(project);
+        
+        return ("/userProtected/UsersProjects");
     }
     
 }

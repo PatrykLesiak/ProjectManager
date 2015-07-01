@@ -128,14 +128,22 @@ public class ModifyModule implements Serializable {
     
     /**
      * Function for form processing. It modifies module tuple in table.
+     * 
+     * @return Navigation destination.
      */
-    public void modify() {
+    public String modify() {
         module.setTitle(title);
         module.setDescription(description);
         module.setReadmelink(readmeLink);
         module.setRecruting(recruiting);
 
         projectDatabaseControler.modifyModule(module);
+        
+        return "/userProtected/modify_project.xhtml?id=" + ProjectId;
+    }
+    
+    public void delete(int moduleID) {
+        projectDatabaseControler.deleteModule(moduleID);
     }
     
 }

@@ -288,4 +288,13 @@ public class ProjectDatabaseController {
     public Asksforcollaboration getAsksforcollaborationById(int id){
         return asksforcollaborationFacade.find(id);
     }
+    
+    /**
+     * Removes module from the database.
+     * 
+     * @param moduleID Module ID to be romeved.
+     */
+    public void deleteModule(int moduleID) {
+        moduleFacade.remove(moduleFacade.find(moduleID));
+    }
 }
