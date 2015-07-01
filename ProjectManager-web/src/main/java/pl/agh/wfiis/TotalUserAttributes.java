@@ -124,7 +124,7 @@ public class TotalUserAttributes implements Serializable {
      */
     public List<Module> getAllLideredModules(int userid){
         User u = projectDatabaseControler.getUserById(userid);
-        return projectDatabaseControler.getAllLideredProjects(u);
+        return projectDatabaseControler.getAllLideredModules(u);
         }
     
     /**

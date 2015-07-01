@@ -197,7 +197,11 @@ public class ProjectDatabaseController {
         List<Project> list = new ArrayList<>(projectDictionary);
         return list;
     }
-    
+    /**
+     * Gets uniqe list of projects in which user is
+     * @param id
+     * @return 
+     */
     public List<Project> getProjectListByUserId(int id){
         User u = userFacade.find(id);
         
@@ -209,7 +213,12 @@ public class ProjectDatabaseController {
         return list;
 
     }
-    
+    /**
+     * Checks if user is already part of the module
+     * @param u
+     * @param m
+     * @return 
+     */
     public boolean isUserInModule(User u, Module m){
         if (u.getUsersToModulesCollection() == null){
             return false;
@@ -229,6 +238,12 @@ public class ProjectDatabaseController {
         asksforcollaborationFacade.create(asks);
     }
     
+    /**
+     * Checks if given user has already applied to given module
+     * @param u
+     * @param m
+     * @return true if already applied
+     */
     public boolean userAlreadyApplied(User u, Module m){
         for(Asksforcollaboration askfc : u.getAsksforcollaborationCollection()){
             if(askfc.getModuleid().equals(m)) return true;
@@ -236,7 +251,12 @@ public class ProjectDatabaseController {
         return false;
     }
 
-    public List<Module> getAllLideredProjects(User u) {
+    /**
+     * Gets non repeating list of already lidered modules by user
+     * @param u
+     * @return 
+     */
+    public List<Module> getAllLideredModules(User u) {
         HashSet<Module> moduleDictionary = new HashSet<>();
         for(Project p : u.getProjectCollection()){
             moduleDictionary.addAll(p.getModuleCollection());
@@ -245,6 +265,12 @@ public class ProjectDatabaseController {
         return list;
     }
 
+    
+    /**
+     * Invites user to given module
+     * @param u
+     * @param m 
+     */
     public void inviteUserToModule(User u, Module m) {
         Invitestoprojects inv = new Invitestoprojects();
         inv.setUserid(u);
@@ -252,6 +278,12 @@ public class ProjectDatabaseController {
         invitestoprojectsFacade.create(inv);
     }
 
+    /**
+     * Checks if given user is already invited to given module
+     * @param u
+     * @param m
+     * @return true if already invited
+     */
     public boolean userAlreadyInvited(User u, Module m) {
         for(Invitestoprojects inv : u.getInvitestoprojectsCollection()){
             if (m.getModuleid().equals(inv.getModuleid().getModuleid())) return true;
@@ -262,7 +294,11 @@ public class ProjectDatabaseController {
     public Invitestoprojects getInvitestoprojectById(int id){
         return invitestoprojectsFacade.find(id);
     }
-
+    
+    /**
+     * Adds user to module by invitation to module
+     * @param inv 
+     */
     public void addUserToModule(Invitestoprojects inv) {
         UsersToModules utm = new UsersToModules();
         utm.setModuleid(inv.getModuleid());
@@ -274,6 +310,10 @@ public class ProjectDatabaseController {
        invitestoprojectsFacade.remove(inv);
     }
 
+    /**
+     * Adds user to module by ask for collaboration
+     * @param ask 
+     */
     public void addUserToModule(Asksforcollaboration ask) {
         UsersToModules utm = new UsersToModules();
         utm.setModuleid(ask.getModuleid());
@@ -281,10 +321,19 @@ public class ProjectDatabaseController {
         usersToModulesFacade.create(utm);
     }
 
+    /**
+     * deletes ask for collaboration
+     * @param ask 
+     */
     public void deleteAsk(Asksforcollaboration ask) {
         asksforcollaborationFacade.remove(ask);
     }
     
+    /**
+     * returns ask for collaboration by its id
+     * @param id
+     * @return ask for collaboration
+     */
     public Asksforcollaboration getAsksforcollaborationById(int id){
         return asksforcollaborationFacade.find(id);
     }
