@@ -18,8 +18,8 @@
                     <c:set var="projekt" value="#{createProject.getProjectById(param['id'])}" />
                     <h2>#{projekt.getTitle()}</h2>
                     <img src="#{projekt.getPicturelink()}" class="img-circle" height="300" size="300"></img>
-                    <h2><h:button rendered="#{projekt.getRecruting()}" class="btn btn-success btn-large" value="Apply">
-                        </h:button></h2>
+                    <h2><span class="label label-success">Registration is opened</span>
+                        </h2>
                 </div>
                 <br></br>
                 </div>

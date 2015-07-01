@@ -98,14 +98,29 @@ public class TotalProjectAttributes implements Serializable {
         this.totalTechnology = totalTechnology;
     }
     
+    /**
+     * changes bool value to string value
+     * @param val
+     * @return "" if true, "closed" if false
+     */
     public static String boolToClassText(boolean val){
         return val ? "": "closed";
     }
+    
+    /**
+     * Gets random list of 3 projects
+     * @return list of projects
+     */
     public List<Project> getRandomProjectList(){
         int number = 3;
         return projectDatabaseControler.getRandomProjects(number);
     }
     
+    /**
+     * Get all leadered projects by user id
+     * @param ID
+     * @return list of projects
+     */
     public List<Project> getLeadersProjects(int ID) {
         return projectDatabaseControler.getLeadersProjects(ID);
     }

@@ -17,6 +17,11 @@ import java.net.URLConnection;
 @Named(value = "textFetcher")
 @SessionScoped
 public class TextFetcher implements Serializable {
+    /**
+     * Gets text from given url and returns as string
+     * @param urlString
+     * @return string of text
+     */
 	public static String getTextFromUrl(String urlString) {
             if (urlString == "") return "";
 		try {

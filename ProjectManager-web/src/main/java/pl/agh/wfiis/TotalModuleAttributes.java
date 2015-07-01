@@ -23,7 +23,9 @@ import pl.agh.wfiis.model.ProjectDatabaseController;
 @Named(value = "totalModuleAttributes")
 @SessionScoped
 public class TotalModuleAttributes implements Serializable {
-
+     /**
+     * Object of database controller for Project related operations.
+     */
     @EJB
     private ProjectDatabaseController projectDatabaseController;
     
@@ -73,16 +75,30 @@ public class TotalModuleAttributes implements Serializable {
         this.technologyList = technologyList;
     }
     
+    /**
+     * gets module by id
+     * @param id
+     * @return 
+     */
     public Module getModuleById(int id){
         Module m = projectDatabaseController.getModuleByID(id);
         return m;
     }
    
+    /**
+     * accepts invitation
+     * @param invid invitation id
+     */
     public void acceptInvitation(int invid){
         Invitestoprojects inv = projectDatabaseController.getInvitestoprojectById(invid);
         projectDatabaseController.addUserToModule(inv);
         projectDatabaseController.deleteInvitation(inv);
     }
+    
+    /**
+     * accpets ask for collaboration
+     * @param askid ask id
+     */
     public void acceptAsk(int askid){
         Asksforcollaboration ask = projectDatabaseController.getAsksforcollaborationById(askid);
         projectDatabaseController.addUserToModule(ask);
