@@ -8,7 +8,11 @@
     <class>pl.agh.wfiis.database.UsersToModules</class>
     <class>pl.agh.wfiis.database.UsersToTechnologies</class>
     <class>pl.agh.wfiis.database.Module</class>
+    <class>pl.agh.wfiis.database.Project</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+        <property name="eclipselink.query-results-cache" value="false" />
+        <property name="eclipselink.cache.shared.default" value="false" />
+    </properties>
   </persistence-unit>
 </persistence>
