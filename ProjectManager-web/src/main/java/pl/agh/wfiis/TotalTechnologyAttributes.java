@@ -21,11 +21,26 @@ import pl.agh.wfiis.model.ProjectDatabaseController;
 @Named(value = "totalTechnologyAttributes")
 @SessionScoped
 public class TotalTechnologyAttributes implements Serializable {
+     /**
+     * Object of database controller for Project related operations.
+     */
     @EJB
     private ProjectDatabaseController projectDatabaseControler;
+    
+    /**
+     * Returns technology by id
+     * @param id
+     * @return technology
+     */
     public Technology getTechnologyById(int id){
         return projectDatabaseControler.getTechnologyById(id);
     }
+    
+    /**
+     * Gets list of projects where given technology is used
+     * @param id
+     * @return 
+     */
     public List<Project> getProjectTechnologyListById(int id){
         return projectDatabaseControler.getProjectListByTechnologyId(id);
     }
