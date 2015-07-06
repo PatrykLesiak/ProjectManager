@@ -1,0 +1,22 @@
+<taskdef  classpath="C:\Users\Patryk\.m2\repository\aspectj\aspectjtools\1.5.3\aspectjtools-1.5.3.jar"
+ resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties"/>
+<target name="aspectj">
+<echo level="info">--- aspectj (start) ---</echo>
+<condition property="targetos" value="windows" else="unix">
+    <os family="windows"/>
+</condition>
+<pathconvert targetos="${targetos}" property="javac.convertedClasspath" >
+    <path path="${javac.classpath}" />
+</pathconvert>
+<iajc source="1.6" target="1.6" showweaveinfo="true" verbose="true" destdir="${build.classes.dir}"  >
+    <inpath>
+        <pathelement location="${build.classes.dir}"/>
+    </inpath>
+    <classpath>
+        <pathelement location="${javac.convertedClasspath}" />
+    </classpath>
+</iajc>
+<echo level="info">LORDDOSKIAS BRUTAL TEST ---</echo>
+</target>
+
+<target name="-post-compile" depends="aspectj"></target>

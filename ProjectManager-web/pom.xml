@@ -13,6 +13,7 @@
     <packaging>war</packaging>
 
     <name>ProjectManager-web</name>
+       
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -21,15 +22,20 @@
     
     <dependencies>
         <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>5.0</version>
-        </dependency>
-        <dependency>
             <groupId>pl.agh.wfiis</groupId>
             <artifactId>ProjectManager-ejb</artifactId>
             <version>dev</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>1.5.3</version>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
