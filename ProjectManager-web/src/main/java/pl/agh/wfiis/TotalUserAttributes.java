@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
-import pl.agh.wfiis.database.Invitestoprojects;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.User;
@@ -16,7 +15,7 @@ import pl.agh.wfiis.model.ProjectDatabaseController;
 import pl.agh.wfiis.model.UserDatabaseController;
 
 /**
- * Managed bean for 
+ * Managed bean for user attributes operations.
  */
 @Named(value = "totalUserAttributes")
 @SessionScoped

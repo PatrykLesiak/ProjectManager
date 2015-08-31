@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.model.UserDatabaseController;
 
 /**
@@ -80,6 +79,4 @@ public class UserSessionManager implements Serializable {
 
 	return false;
     }
-   
-    
 }

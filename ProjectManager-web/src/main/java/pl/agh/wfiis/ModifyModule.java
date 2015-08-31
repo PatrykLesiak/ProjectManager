@@ -142,6 +142,11 @@ public class ModifyModule implements Serializable {
         return "/userProtected/modify_project.xhtml?id=" + ProjectId;
     }
     
+    /**
+     * Delete module with given ID.
+     * 
+     * @param moduleID Mosule ID.
+     */
     public void delete(int moduleID) {
         projectDatabaseControler.deleteModule(moduleID);
     }

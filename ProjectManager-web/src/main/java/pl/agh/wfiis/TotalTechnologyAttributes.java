@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.agh.wfiis;
 
 import javax.inject.Named;
@@ -15,8 +10,7 @@ import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
 /**
- *
- * @author hawker
+ * Managed bean for technology attributes operations.
  */
 @Named(value = "totalTechnologyAttributes")
 @SessionScoped

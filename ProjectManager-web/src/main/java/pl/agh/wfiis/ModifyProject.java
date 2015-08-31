@@ -2,15 +2,15 @@ package pl.agh.wfiis;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
-
+/**
+ * Managed bean for operations related to project modifying.
+ */
 @Named(value = "modifyProject")
 @SessionScoped
 public class ModifyProject implements Serializable {
@@ -139,6 +139,11 @@ public class ModifyProject implements Serializable {
         logger.info(project.getTitle());
     }
     
+    /**
+     * Send modify request to database controller with modified project object.
+     * 
+     * @return Destination of redirection.
+     */
     public String modifyProject() {
         project.setTitle(title);
         project.setDescription(description);

@@ -17,8 +17,7 @@ import pl.agh.wfiis.database.UsersToModules;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
 /**
- *
- * @author hawker
+ * Managed bean for module attributes operations.
  */
 @Named(value = "totalModuleAttributes")
 @SessionScoped
@@ -31,7 +30,10 @@ public class TotalModuleAttributes implements Serializable {
     
     private List<User> userList;
     private List<Technology> technologyList;
-
+    
+    /**
+    * Logger object for log operations which facilitates development process.
+    */
     Logger logger = Logger.getLogger(getClass().getName());
     private Object Iterables;
     
@@ -76,9 +78,10 @@ public class TotalModuleAttributes implements Serializable {
     }
     
     /**
-     * gets module by id
-     * @param id
-     * @return 
+     * Gets module by id.
+     * 
+     * @param id Module ID to be found.
+     * @return m Found module object.
      */
     public Module getModuleById(int id){
         Module m = projectDatabaseController.getModuleByID(id);
@@ -86,7 +89,8 @@ public class TotalModuleAttributes implements Serializable {
     }
    
     /**
-     * accepts invitation
+     * Accepts invitation.
+     * 
      * @param invid invitation id
      */
     public void acceptInvitation(int invid){
@@ -96,7 +100,8 @@ public class TotalModuleAttributes implements Serializable {
     }
     
     /**
-     * accpets ask for collaboration
+     * Accpets ask for collaboration.
+     * 
      * @param askid ask id
      */
     public void acceptAsk(int askid){

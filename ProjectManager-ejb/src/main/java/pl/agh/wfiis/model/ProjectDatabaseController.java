@@ -24,7 +24,6 @@ import pl.agh.wfiis.facades.InvitestoprojectsFacade;
 import pl.agh.wfiis.facades.ModuleFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
 import pl.agh.wfiis.facades.UsersToModulesFacade;
-import pl.agh.wfiis.facades.UsersToTechnologiesFacade;
 
 /**
  * Stateless bean for all kind of operations on the database connected with registered projects.
@@ -163,6 +162,12 @@ public class ProjectDatabaseController {
         return userFacade.find(id);
     }
     
+    /**
+     * Get leader project.
+     * 
+     * @param ID Leader ID.
+     * @return   Found project object.
+     */
     public List<Project> getLeadersProjects(int ID) {
         List<Project> projects = projectFacade.findAll();
         
@@ -176,18 +181,39 @@ public class ProjectDatabaseController {
         return projects;
     }
     
+    /**
+     * Send project object to facade.
+     * 
+     * @param project Project to be modified.
+     */
     public void modifyProject(Project project) {
         projectFacade.edit(project);
     }
 
+    /**
+     * Send module object to facade. Creates new module in the database.
+     * 
+     * @param module New module object.
+     */
     public void createModule(Module module) {
         moduleFacade.create(module);
     }
     
+    /**
+     * Send module object to facade. Modifies existing object in the database.
+     * 
+     * @param module Module object to be modified.
+     */
     public void modifyModule(Module module) {
         moduleFacade.edit(module);
     }
     
+    /**
+     * Retrieves list of projects by technology ID.
+     * 
+     * @param id Technology ID.
+     * @return   List of found projects.   
+     */
     public List<Project> getProjectListByTechnologyId(int id){
         Technology t = technologyFacade.find(id);
         HashSet<Project> projectDictionary = new HashSet<>();
@@ -199,6 +225,7 @@ public class ProjectDatabaseController {
     }
     /**
      * Gets uniqe list of projects in which user is
+     * 
      * @param id
      * @return 
      */
@@ -214,10 +241,11 @@ public class ProjectDatabaseController {
 
     }
     /**
-     * Checks if user is already part of the module
-     * @param u
-     * @param m
-     * @return 
+     * Checks if user is already part of the module.
+     * 
+     * @param u User object.
+     * @param m Module object.
+     * @return  true if user belongs to given module. False otherwise.
      */
     public boolean isUserInModule(User u, Module m){
         if (u.getUsersToModulesCollection() == null){
@@ -239,10 +267,11 @@ public class ProjectDatabaseController {
     }
     
     /**
-     * Checks if given user has already applied to given module
-     * @param u
-     * @param m
-     * @return true if already applied
+     * Checks if given user has already applied to given module.
+     * 
+     * @param u Uesr object.
+     * @param m Module object.
+     * @return true if already applied. False otherwise.
      */
     public boolean userAlreadyApplied(User u, Module m){
         for(Asksforcollaboration askfc : u.getAsksforcollaborationCollection()){
@@ -252,8 +281,9 @@ public class ProjectDatabaseController {
     }
 
     /**
-     * Gets non repeating list of already lidered modules by user
-     * @param u
+     * Gets non repeating list of already lidered modules by user.
+     * 
+     * @param u User object.
      * @return 
      */
     public List<Module> getAllLideredModules(User u) {

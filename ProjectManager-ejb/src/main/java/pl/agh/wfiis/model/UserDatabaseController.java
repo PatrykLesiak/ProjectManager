@@ -115,7 +115,7 @@ public class UserDatabaseController {
     }
     
     /**
-     * Function is responsible for retrieving user object by its email.
+     * Retrieve user object by its email.
      * 
      * @param email Email of the user to be found.
      * @return      User object or null pointer when user cannot be found.

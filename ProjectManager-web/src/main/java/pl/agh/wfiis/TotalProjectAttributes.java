@@ -17,16 +17,20 @@ import pl.agh.wfiis.database.UsersToModules;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
 /**
- *
- * @author hawker
+ * Managed bean for project attributes operations.
  */
 @Named(value = "totalProjectAttributes")
 @RequestScoped
 public class TotalProjectAttributes implements Serializable {
-
+     /**
+     * Object of database controller for Project related operations.
+     */
     @EJB
     private ProjectDatabaseController projectDatabaseControler;
     
+    /**
+    * Logger object for log operations which facilitates development process.
+    */
     Logger logger = Logger.getLogger(getClass().getName());
     
     private List<User> totalPeople;
@@ -123,7 +127,5 @@ public class TotalProjectAttributes implements Serializable {
      */
     public List<Project> getLeadersProjects(int ID) {
         return projectDatabaseControler.getLeadersProjects(ID);
-    }
-    
-    
+    }  
 }
