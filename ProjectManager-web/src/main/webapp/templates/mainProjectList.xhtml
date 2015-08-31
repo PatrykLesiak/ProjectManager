@@ -16,9 +16,11 @@
            <br></br>
            <div class="row">
                <div class="col-md-12">
-               <h:outputLink value="/ProjectManager-web/faces/userProtected/invitesToProjects.xhtml" class="btn-large btn-primary">
-                   <button class="btn-large btn-primary">Invitations</button>
-               </h:outputLink>
+               <h:panelGroup id="invitationsPanel" rendered="#{(userSessionManager.isUserLoggedin())}">
+                <h:outputLink value="/ProjectManager-web/faces/userProtected/invitesToProjects.xhtml" class="btn-large btn-primary">
+                    <button class="btn-large btn-primary">Invitations</button>
+                </h:outputLink>
+               </h:panelGroup>
                </div>
           
            <table class="table table-hover">
