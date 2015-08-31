@@ -9,6 +9,9 @@ import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 
+/**
+ * Managed bean used for module modify related operations.
+ */
 @Named(value = "modifyModule")
 @SessionScoped
 public class ModifyModule implements Serializable {
