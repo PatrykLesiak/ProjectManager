@@ -121,6 +121,14 @@ public class TotalProjectAttributes implements Serializable {
     }
     
     /**
+     * Gets list of all projects in the database
+     * @return list of all founded projects
+     */
+    public List<Project> getAllProjectList() {
+        return projectDatabaseControler.getAllProjects();
+    }
+    
+    /**
      * Get all leadered projects by user id
      * @param ID
      * @return list of projects

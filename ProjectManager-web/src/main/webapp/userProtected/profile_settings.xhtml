@@ -39,6 +39,23 @@
                             </div>
                             <h:commandButton styleClass="btn btn-primary" action="#{userProfileManager.modify()}" value="Submit" />
                         </h:form> 
+                        <br></br><br></br>
+                        <ui:repeat value="#{totalUserAttributes.getLoggedUserTechnologies()}" var="technology">                
+                            <div class="col-md-4">
+                                <div class="card #{totalProjectAttributes.boolToClassText(true)}">
+                                <h2 class="text-center">#{technology.getName()}</h2>
+                                <center>
+                                    <br></br>
+                                    <h:form>
+                                    <h:commandLink id="next" action="#{totalUserAttributes.deleteUserTechnology(technology.getTechnologyid())}">
+                                        <h:panelGroup styleClass="btn btn-danger">Delete</h:panelGroup>
+                                    </h:commandLink>    
+                                    </h:form>
+                                </center>
+                                </div>                            
+                            </div>
+                        </ui:repeat>          
+
             </ui:define>
         </ui:composition>
     </body>

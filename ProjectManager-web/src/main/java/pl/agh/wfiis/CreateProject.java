@@ -231,6 +231,19 @@ public class CreateProject implements Serializable {
         
         projectDatabaseControler.createNewProjectInDatabase(newProject, leaderId);
         
-        return "/index";
+        clearBeanData();
+        
+        return "/index.xhtml?faces-redirect=true";
+    }
+    
+    /**
+     * Deletes saved data from bean.
+     */
+    private void clearBeanData() {
+        title = null;
+        description = null;
+        readmeLink = null;
+        contactsAndLinks = null;
+        pictureLink = null;
     }
 }

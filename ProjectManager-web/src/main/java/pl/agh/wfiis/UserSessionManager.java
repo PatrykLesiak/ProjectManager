@@ -79,4 +79,11 @@ public class UserSessionManager implements Serializable {
 
 	return false;
     }
+    
+    /**
+     * Redirects user to main page of project.
+     */
+    public String homeRedirect() {
+        return "/userProtected/modify_project.xhtml?id=1";
+    }
 }

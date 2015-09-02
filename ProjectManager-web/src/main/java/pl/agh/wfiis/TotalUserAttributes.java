@@ -10,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
+import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.model.ProjectDatabaseController;
 import pl.agh.wfiis.model.UserDatabaseController;
@@ -157,5 +158,36 @@ public class TotalUserAttributes implements Serializable {
     public boolean userIsLeader(int userid){
         User u = projectDatabaseControler.getUserById(userid);
         return !u.getProjectCollection().isEmpty();
+    }
+    
+    /**
+     * Get technologies of a logged user.
+     * 
+     * @return List of technologies
+     */
+    public List<Technology> getLoggedUserTechnologies() {
+        return userDatabaseController.getUserTechnologies(getLoggedUserId());
+    }
+    
+    /**
+     * Forward delete user technology operation to database controller.
+     * 
+     * @param technologyId Technology id to be removed
+     * @return Rediredtion destination
+     */
+    public String deleteUserTechnology(int technologyId) {
+        userDatabaseController.deleteUserTechnology(getLoggedUserId(), technologyId);
+        return "profile_settings?faces-redirect=true";
+    }
+    
+    /**
+     * Forward assign user technology operation to database controller.
+     * 
+     * @param technologyId Technology id to be added
+     * @return Rediredtion destination
+     */
+    public String assignTechnologyToUser(int technologyId) {
+        userDatabaseController.assignTechnologyToUser(getLoggedUserId(), technologyId);
+        return "profile_settings?faces-redirect=true";
     }
 }

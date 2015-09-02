@@ -164,7 +164,7 @@ public class UserProfileManager implements Serializable {
         user.setAvatarlink(avatarLink);
         userDatabaseController.modifyUser(user);
         
-        return "UsersProjects";
+        return "UsersProjects?faces-redirect=true";
     }
     
 }

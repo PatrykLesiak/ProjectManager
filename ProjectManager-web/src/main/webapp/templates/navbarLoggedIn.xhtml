@@ -22,9 +22,24 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><h:link value="Invitations" outcome="/userProtected/invitesToProjects" /></li> 
-                <li><h:link value="Join requests" outcome="/userProtected/asksForJoin" /></li> 
-                <li><h:link value="Account settings" outcome="/userProtected/profile_settings" /></li>
+                <li class="dropdownProjects">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><h:link value="Create new project" outcome="/userProtected/create_project" /></li>
+                        <li><h:link value="My projects" outcome="/userProtected/UsersProjects" /></li>   
+                        <li><h:link value="Find project" outcome="/userProtected/UsersProjects" /></li> 
+                        <li role="separator" class="divider"></li>
+                        <li><h:link value="Invitations" outcome="/userProtected/invitesToProjects" /></li> 
+                        <li><h:link value="Join requests" outcome="/userProtected/asksForJoin" /></li> 
+                    </ul>
+                </li>
+                <li class="dropdown2">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><h:link value="My Profile" outcome="/userProtected/user_page.xhtml?id=#{totalUserAttributes.getLoggedUserId()}" /></li> 
+                        <li><h:link value="Account settings" outcome="/userProtected/profile_settings" /></li> 
+                    </ul>
+                </li>
                 <li><h:link value="Logout" outcome="/public/logoutMessage" /></li>
                 
             </ul>

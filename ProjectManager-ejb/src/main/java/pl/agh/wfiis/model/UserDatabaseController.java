@@ -3,6 +3,7 @@ package pl.agh.wfiis.model;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,12 +11,16 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.LocalBean;
 import pl.agh.wfiis.database.Groups;
+import pl.agh.wfiis.database.Technology;
 import pl.agh.wfiis.database.User;
 import pl.agh.wfiis.database.UsersGroups;
+import pl.agh.wfiis.database.UsersToTechnologies;
 import pl.agh.wfiis.facades.GroupsFacade;
 import pl.agh.wfiis.facades.UserFacade;
 import pl.agh.wfiis.facades.ProjectFacade;
+import pl.agh.wfiis.facades.TechnologyFacade;
 import pl.agh.wfiis.facades.UsersGroupsFacade;
+import pl.agh.wfiis.facades.UsersToTechnologiesFacade;
 
 /**
  * Statefull bean responsible for all kind of operations on the database connected with users of the application.
@@ -47,6 +52,18 @@ public class UserDatabaseController {
      */
     @EJB
     private UsersGroupsFacade usersGroupsFacade ;
+    
+    /**
+     * Facade to database for UsersToTechnologies class.
+     */
+    @EJB
+    private UsersToTechnologiesFacade usersToTechnologiesFacade;
+    
+    /**
+     * Facade to database for Technology class;
+     */
+    @EJB
+    private TechnologyFacade technologyFacade;
     
     /**
      * Logger object for log operations which facilitates development process.
@@ -168,9 +185,60 @@ public class UserDatabaseController {
         return null;
     }
     
+    /**
+     * Modifies user object in the database.
+     * 
+     * @param user User object to be modified
+     */
     public void modifyUser(User user) {
         userFacade.edit(user);
         
     }
     
+    /**
+     * Retrieves user technologies from the database.
+     * 
+     * @param userId Id of user
+     * @return List of user technologies
+     */
+    public List<Technology> getUserTechnologies(int userId) {
+        List <Technology> result = new ArrayList();
+        List <UsersToTechnologies> usersToTechnologies = usersToTechnologiesFacade.findAll();
+        
+        for (UsersToTechnologies entry : usersToTechnologies) {
+            if (entry.getUserid().getUserid() == userId) {
+               result.add(technologyFacade.find(entry.getTechnologyid().getTechnologyid()));
+            }
+        }
+        return result; 
+    }
+    
+    /**
+     * Removes assigned technology from user.
+     * 
+     * @param userId User id
+     * @param technologyId TYechnology id
+     */
+    public void deleteUserTechnology(int userId, int technologyId) {
+        List <UsersToTechnologies> usersToTechnologies = usersToTechnologiesFacade.findAll();
+        
+        for (UsersToTechnologies entry : usersToTechnologies) {
+            if (entry.getUserid().getUserid() == userId && entry.getTechnologyid().getTechnologyid() == technologyId) {
+                usersToTechnologiesFacade.remove(entry);
+            }
+        }
+    }
+    
+    /**
+     * Assigns given technology to given user in the database.
+     * 
+     * @param userId User id
+     * @param technologyId Technology id
+     */
+    public void assignTechnologyToUser(int userId, int technologyId) {
+        UsersToTechnologies newEntry = new UsersToTechnologies();
+        newEntry.setUserid(userFacade.find(userId));
+        newEntry.setTechnologyid(technologyFacade.find(technologyId));
+        usersToTechnologiesFacade.create(newEntry);
+    }
 }

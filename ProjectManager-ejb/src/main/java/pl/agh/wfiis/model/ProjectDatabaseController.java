@@ -100,10 +100,18 @@ public class ProjectDatabaseController {
     public List<Project> getRandomProjects(int number) {
         int projectCount = projectFacade.count();
         List<Project> listOfRandomProjects = new ArrayList<>();
+        
+        if (projectCount < number) {
+            return listOfRandomProjects;
+        }
+        
         Random r = new Random();
-        for(int i =0;i<number;++i){
-            int randomId = r.nextInt(projectCount)+1;
-            listOfRandomProjects.add(projectFacade.find(randomId));     
+        for(int i = 0; i < number; ++i){
+            int randomId = r.nextInt(projectCount) + 1;
+            while (listOfRandomProjects.contains(projectFacade.find(randomId))) {
+                randomId = r.nextInt(projectCount) + 1;
+            }
+            listOfRandomProjects.add(projectFacade.find(randomId));
         }
         return listOfRandomProjects;
     }
