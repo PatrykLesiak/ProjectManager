@@ -60,9 +60,8 @@
                                 <center>
                                     <br></br>
                                     <h:form>
-                                    <h:commandLink id="next" action="#{totalProjectAttributes.deleteModuleTechnology(technology.getTechnologyid(), param['id'])}">
-                                        <h:panelGroup styleClass="btn btn-warning">Delete</h:panelGroup>
-                                    </h:commandLink>    
+                                    <h:commandButton styleClass="btn btn-warning" value="Delete" action="#{totalProjectAttributes.deleteModuleTechnology(technology.getTechnologyid(), modifyModule.moduleId)}">
+                                    </h:commandButton>
                                     </h:form>
                                 </center>
                                 </div>                            
