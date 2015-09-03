@@ -11,6 +11,13 @@ body{
    
 }
 
+.card.tech {
+    background-color: #9CD3E6;
+    border-radius:10px;
+    padding: 3px;
+    margin-bottom: 18px; 
+}
+
 .card.closed{
     background: rgba(211,211,211,0.2);
     color: rgba(3,3,3,0.2)

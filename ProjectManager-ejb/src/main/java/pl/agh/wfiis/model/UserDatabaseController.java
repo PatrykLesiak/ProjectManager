@@ -241,4 +241,13 @@ public class UserDatabaseController {
         newEntry.setTechnologyid(technologyFacade.find(technologyId));
         usersToTechnologiesFacade.create(newEntry);
     }
+    
+    /**
+     * Gets all technologies objects from the database.
+     * 
+     * @return All founded technologies
+     */
+    public List <Technology> getAllTechnologies() {
+        return technologyFacade.findAll();
+    }
 }

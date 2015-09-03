@@ -40,22 +40,30 @@
                             <h:commandButton styleClass="btn btn-primary" action="#{userProfileManager.modify()}" value="Submit" />
                         </h:form> 
                         <br></br><br></br>
+                        <h2>Your technologies:</h2>
+                        <h:form>             
+                            <h:selectOneMenu value="#{technologySelector.selectedTechnology}">
+                                <f:selectItems value="#{technologySelector.availableTechnologies}" />
+                            </h:selectOneMenu>
+                            &nbsp;&nbsp;
+                            <h:commandButton styleClass="btn btn-info" value="Add" action="profile_settings" />
+                        </h:form>
+                        <br></br><br></br>
                         <ui:repeat value="#{totalUserAttributes.getLoggedUserTechnologies()}" var="technology">                
                             <div class="col-md-4">
-                                <div class="card #{totalProjectAttributes.boolToClassText(true)}">
+                                <div class="card tech">
                                 <h2 class="text-center">#{technology.getName()}</h2>
                                 <center>
                                     <br></br>
                                     <h:form>
                                     <h:commandLink id="next" action="#{totalUserAttributes.deleteUserTechnology(technology.getTechnologyid())}">
-                                        <h:panelGroup styleClass="btn btn-danger">Delete</h:panelGroup>
+                                        <h:panelGroup styleClass="btn btn-warning">Delete</h:panelGroup>
                                     </h:commandLink>    
                                     </h:form>
                                 </center>
                                 </div>                            
                             </div>
-                        </ui:repeat>          
-
+                        </ui:repeat>
             </ui:define>
         </ui:composition>
     </body>
