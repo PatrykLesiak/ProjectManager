@@ -239,6 +239,13 @@ public class UserDatabaseController {
         UsersToTechnologies newEntry = new UsersToTechnologies();
         newEntry.setUserid(userFacade.find(userId));
         newEntry.setTechnologyid(technologyFacade.find(technologyId));
+        List<UsersToTechnologies> collection = usersToTechnologiesFacade.findAll();
+        for (UsersToTechnologies entry : collection) {
+            if (entry.getTechnologyid().getTechnologyid() == technologyId &&
+                entry.getUserid().getUserid() == userId) {
+                return;
+            }
+        }
         usersToTechnologiesFacade.create(newEntry);
     }
     

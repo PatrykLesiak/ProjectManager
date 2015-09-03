@@ -22,6 +22,7 @@ import pl.agh.wfiis.database.UsersToModules;
 import pl.agh.wfiis.facades.AsksforcollaborationFacade;
 import pl.agh.wfiis.facades.InvitestoprojectsFacade;
 import pl.agh.wfiis.facades.ModuleFacade;
+import pl.agh.wfiis.facades.TechnologiesToModulesFacade;
 import pl.agh.wfiis.facades.TechnologyFacade;
 import pl.agh.wfiis.facades.UsersToModulesFacade;
 
@@ -80,6 +81,12 @@ public class ProjectDatabaseController {
      */
     @EJB
     private UsersToModulesFacade usersToModulesFacade;
+    
+    /**
+     * Facade to database for TechnologiesToModules class.
+     */
+    @EJB
+    private TechnologiesToModulesFacade technologiesToModulesFacade;
     
     /**
      * Retrieves registered projects from the database.
@@ -383,5 +390,46 @@ public class ProjectDatabaseController {
      */
     public void deleteModule(int moduleID) {
         moduleFacade.remove(moduleFacade.find(moduleID));
+    }
+    
+    /**
+     * Retrieves technologies asigned to given module.
+     * 
+     * @param moduleId Given module id.
+     * @return List of founded technologies.
+     */
+    public List<Technology> getAllModuleTechnologies(int moduleId) {
+        List<TechnologiesToModules> technologiesToModules = technologiesToModulesFacade.findAll();
+        List<Technology> listOfModuleTechnologies = new ArrayList();
+        
+        for (TechnologiesToModules entry : technologiesToModules) {
+            if (entry.getModuleid().getModuleid() == moduleId) {
+                listOfModuleTechnologies.add(technologyFacade.find(entry.getTechnologyid().getTechnologyid()));
+            }
+        }
+        
+        return listOfModuleTechnologies;
+    }
+    
+    /**
+     * Assigns technology to given user.
+     * 
+     * @param moduleId Module id
+     * @param technologyId Technology id
+     */
+    public void assignTechnologyToUser(int moduleId, int technologyId) {
+        TechnologiesToModules newEntry = new TechnologiesToModules();
+        newEntry.setModuleid(moduleFacade.find(moduleId));
+        newEntry.setTechnologyid(technologyFacade.find(technologyId));
+        
+        List<TechnologiesToModules> collection = technologiesToModulesFacade.findAll();
+        for (TechnologiesToModules entry: collection) {
+            if (entry.getModuleid().getModuleid() == moduleId &&
+                entry.getTechnologyid().getTechnologyid() == technologyId) {
+                return;
+            }
+        }
+
+        technologiesToModulesFacade.create(newEntry);
     }
 }

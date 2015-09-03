@@ -41,6 +41,33 @@
                             </div>
                             <h:commandButton styleClass="btn btn-primary" action="#{modifyModule.modify()}" value="Submit" />
                         </h:form> 
+                        <br></br><br></br>
+                        <h2>Your technologies:</h2>
+                        <h:form>             
+                            <h:selectOneMenu value="#{technologySelector.selectedTechnologyForModule}">
+                                <f:selectItems value="#{technologySelector.availableTechnologies}" />
+                            </h:selectOneMenu>
+                            &nbsp;&nbsp;
+                            <h:commandButton styleClass="btn btn-info" value="Add" action="modify_module?faces-redirect=true&amp;includeViewParams=true" >
+                                <f:param name="id" value="#{param['id']}" />
+                            </h:commandButton>
+                        </h:form>
+                        <br></br><br></br>
+                        <ui:repeat value="#{technologySelector.getModuleTechnologies()}" var="technology">                
+                            <div class="col-md-4">
+                                <div class="card tech">
+                                <h2 class="text-center">#{technology.getName()}</h2>
+                                <center>
+                                    <br></br>
+                                    <h:form>
+                                    <h:commandLink id="next" action="#{totalProjectAttributes.deleteModuleTechnology(technology.getTechnologyid(), param['id'])}">
+                                        <h:panelGroup styleClass="btn btn-warning">Delete</h:panelGroup>
+                                    </h:commandLink>    
+                                    </h:form>
+                                </center>
+                                </div>                            
+                            </div>
+                        </ui:repeat>
             </ui:define>
         </ui:composition>
     </body>

@@ -4,10 +4,13 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.context.FacesContext;
 import pl.agh.wfiis.database.Module;
 import pl.agh.wfiis.database.Project;
 import pl.agh.wfiis.database.TechnologiesToModules;
@@ -94,6 +97,27 @@ public class TotalProjectAttributes implements Serializable {
         }
         return this.totalTechnology;
     }
+    
+    /**
+     * Retrieves technologies assigned to currently handled module.
+     * 
+     * @return List of module technologies
+     */
+    public List<Technology> getModuleTechnologies(int moduleId) {
+        Map<String, String> urlParameters = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap(); 
+        List<Technology> result = new ArrayList();
+        
+        Module module = projectDatabaseControler.getModuleByID(moduleId);
+        Collection<TechnologiesToModules> collection = module.getTechnologiesToModulesCollection();
+        
+        for (TechnologiesToModules entry : collection) {
+            if (entry.getModuleid().getModuleid() == moduleId) {
+                result.add(entry.getTechnologyid());
+            }
+        }
+
+        return result;
+    }
 
     /**
      * @param totalTechnology the totalTechnology to set
@@ -136,4 +160,9 @@ public class TotalProjectAttributes implements Serializable {
     public List<Project> getLeadersProjects(int ID) {
         return projectDatabaseControler.getLeadersProjects(ID);
     }  
+    
+    public String deleteModuleTechnology(int technologyId, int moduleId) {
+        logger.info("Usuwam: " + technologyId + " " + moduleId);
+        return "modify_module?faces-redirect=true&id=7";
+    }
 }
