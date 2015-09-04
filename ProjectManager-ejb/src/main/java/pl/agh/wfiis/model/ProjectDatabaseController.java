@@ -432,4 +432,20 @@ public class ProjectDatabaseController {
 
         technologiesToModulesFacade.create(newEntry);
     }
+    
+    /**
+     * Deletes given technology from associated module.
+     * 
+     * @param technologyId Technology id
+     * @param moduleId Module id
+     */
+    public void deleteTechnologyFromModule(int technologyId, int moduleId) {
+        List<TechnologiesToModules> collection = technologiesToModulesFacade.findAll();
+        for (TechnologiesToModules entry : collection) {
+            if (entry.getModuleid().getModuleid() == moduleId && 
+                entry.getTechnologyid().getTechnologyid() == technologyId) {
+                technologiesToModulesFacade.remove(entry);
+            }
+        }
+    }
 }

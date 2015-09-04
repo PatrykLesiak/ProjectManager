@@ -162,7 +162,7 @@ public class TotalProjectAttributes implements Serializable {
     }  
     
     public String deleteModuleTechnology(int technologyId, int moduleId) {
-        logger.info("Usuwam: " + technologyId + " " + moduleId);
+        projectDatabaseControler.deleteTechnologyFromModule(technologyId, moduleId);
         return "modify_module?faces-redirect=true&id=7";
     }
 }
