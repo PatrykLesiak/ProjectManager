@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+    <body>
+        <ui:composition template="../templates/defaultLayout.xhtml">  
+
+            <ui:define name="content">
+                <div class="row" style="padding-top:70px">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2>List of all Technologies</h2>
+                        <ui:repeat value="#{totalTechnologyAttributes.getAllTechnologiesList()}" var="technology">
+                               <h:outputLink value="/ProjectManager-web/faces/userProtected/technology.xhtml?id=#{technology.getTechnologyid()}">
+                                <span class="label label-default">#{technology.getName()}</span>
+                                </h:outputLink>
+                            </ui:repeat>
+                    </div>
+                </div>   
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

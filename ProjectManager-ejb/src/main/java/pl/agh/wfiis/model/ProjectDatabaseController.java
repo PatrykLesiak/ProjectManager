@@ -97,6 +97,26 @@ public class ProjectDatabaseController {
         List<Project> listOfAllProjects = projectFacade.findAll();      
         return listOfAllProjects;
     }
+    
+    /**
+     * Returns all Technologies in database
+     * 
+     * @return          List of all Technologies.
+     */
+    public List<Technology> getAllTechnologies() {
+        List<Technology> listOfAllTechnologies = technologyFacade.findAll();      
+        return listOfAllTechnologies;
+    }
+    
+    /**
+     * Returns all users in database
+     * 
+     * @return          List of all Users.
+     */
+    public List<User> getAllUsers() {
+        List<User> listOfAllUsers = userFacade.findAll();      
+        return listOfAllUsers;
+    }
          
     /**
      * Functin returns random project list from the database.

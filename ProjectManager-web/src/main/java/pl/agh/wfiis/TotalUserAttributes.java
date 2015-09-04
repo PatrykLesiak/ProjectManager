@@ -127,6 +127,15 @@ public class TotalUserAttributes implements Serializable {
         return projectDatabaseControler.getAllLideredModules(u);
         }
     
+     /**
+     * Returns all users in database
+     * 
+     * @return          List of all Users.
+     */
+    public List<User> getAllUsersList(){
+        return projectDatabaseControler.getAllUsers();
+    }
+    
     /**
      * Make invitation to module 
      * @param userid

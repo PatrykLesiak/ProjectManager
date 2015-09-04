@@ -38,4 +38,14 @@ public class TotalTechnologyAttributes implements Serializable {
     public List<Project> getProjectTechnologyListById(int id){
         return projectDatabaseControler.getProjectListByTechnologyId(id);
     }
+    
+    /**
+     * Returns all Technologies in database
+     * 
+     * @return          List of all Technologies.
+     */
+    public List<Technology> getAllTechnologiesList(){
+        return projectDatabaseControler.getAllTechnologies();
+    }
+    
 }
