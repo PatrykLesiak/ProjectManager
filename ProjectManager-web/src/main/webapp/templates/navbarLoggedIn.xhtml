@@ -26,14 +26,21 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><h:link value="Create new project" outcome="/userProtected/create_project" /></li>
-                        <li><h:link value="My projects" outcome="/userProtected/UsersProjects" /></li>   
-                        <li><h:link value="Find project" outcome="/userProtected/UsersProjects" /></li> 
+                        <li><h:link value="My projects" outcome="/userProtected/UsersProjects" /></li>  
                         <li role="separator" class="divider"></li>
                         <li><h:link value="Invitations" outcome="/userProtected/invitesToProjects" /></li> 
                         <li><h:link value="Join requests" outcome="/userProtected/asksForJoin" /></li> 
                     </ul>
                 </li>
-                <li class="dropdown2">
+                <li class="dropdown4">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Find<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><h:link value="Project" outcome="/public/allProjects" /></li> 
+                        <li><h:link value="Technology" outcome="/userProtected/allTechnologies" /></li> 
+                        <li><h:link value="User" outcome="/userProtected/allUsers" /></li> 
+                    </ul>
+                </li>
+                <li class="dropdown3">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><h:link value="My Profile" outcome="/userProtected/user_page.xhtml?id=#{totalUserAttributes.getLoggedUserId()}" /></li> 
